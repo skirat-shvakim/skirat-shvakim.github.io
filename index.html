@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="apple-mobile-web-app-title" content="סקירת שווקים">
+<meta name="apple-mobile-web-app-title" content="מצב השוק ואני">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>סקירת שווקים יומית</title>
+<title>מצב השוק ואני</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap">
 <style>
@@ -17,9 +17,43 @@
 --up:light-dark(#0b8a5f,#4fd99a);--upbg:light-dark(#dff6ec,#143426);--down:light-dark(#d23c3c,#ff8a8a);--downbg:light-dark(#fde8e8,#3a1c20)}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Assistant",system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
-.wrap{max-width:720px;margin:0 auto;padding:max(env(safe-area-inset-top),20px) 16px 40px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:8px 4px 16px;color:var(--mute);font-size:14px}
-.top b{color:var(--teal);font-size:17px;font-weight:800}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 40px}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;margin:0 -16px 14px;padding:max(env(safe-area-inset-top),10px) 16px 10px;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-inline-end:auto}
+.brand svg{width:38px;height:38px;flex:none;filter:drop-shadow(0 4px 10px rgb(20 184 166/.25))}
+.bt{font-size:23px;font-weight:800;letter-spacing:-.01em;line-height:1}
+.b2{background:linear-gradient(90deg,var(--teal),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+.date{color:var(--mute);font-size:14px;white-space:nowrap}
+.menu{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:grid;place-content:center;gap:4px;cursor:pointer;flex:none}
+.menu span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink)}
+.nav{position:fixed;inset-block:0;inset-inline-end:0;width:min(300px,84vw);z-index:20;background:var(--card);box-shadow:0 0 40px rgb(0 0 0/.18);padding:max(env(safe-area-inset-top),18px) 18px 18px;transform:translateX(-105%);transition:transform .25s ease;overflow-y:auto}
+.nav.on{transform:none}
+.navhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.navhead button{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer}
+.nav ul{list-style:none;margin:0;padding:0}
+.nav a{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 12px;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600}
+.nav a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line);flex:none}
+.nav a:hover,.nav a.cur{background:var(--mint)}
+.nav a.cur::before{background:var(--teal)}
+.scrim{position:fixed;inset:0;z-index:15;background:rgb(0 0 0/.3);display:none}
+.scrim.on{display:block}
+@media (min-width:1180px){
+  .menu,.scrim,.navhead button{display:none!important}
+  .nav{transform:none;transition:none;box-shadow:none;background:transparent;inset-inline-end:auto;inset-inline-start:calc(50% + 380px);inset-block:96px auto;width:220px;padding:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.nav{transition:none}}
+.mine{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;align-items:center}
+.edit{font:700 14px "Assistant",sans-serif;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px dashed var(--sky);background:transparent;color:var(--sky);cursor:pointer}
+.chooser{display:none;margin-bottom:16px;background:var(--bg);border-radius:16px;padding:14px}
+.chooser.on{display:block}
+.chooser input{width:100%;font:16px "Assistant",sans-serif;min-height:46px;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:10px}
+.chooser .hint{font-size:13px;color:var(--mute);margin:0 0 8px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;max-height:300px;overflow-y:auto}
+.opts label{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 10px;border-radius:10px;background:var(--card);cursor:pointer;font-size:15px}
+.opts input{width:18px;height:18px;min-height:0;margin:0;accent-color:var(--teal)}
+.opts small{color:var(--mute);direction:ltr}
+.chooser .done{font:800 15px "Assistant",sans-serif;min-height:44px;padding:0 18px;border-radius:12px;border:0;background:var(--teal);color:#fff;cursor:pointer;margin-top:10px}
 .card{background:var(--card);border-radius:22px;padding:clamp(20px,4vw,30px);margin-bottom:14px;box-shadow:0 1px 2px rgb(0 0 0/.04),0 8px 28px rgb(14 159 142/.07)}
 .hero{background:linear-gradient(160deg,light-dark(#e6f4f1,#1a2e2c) 0%,light-dark(#edf3fb,#1b2533) 100%);color:var(--ink);padding-top:clamp(24px,5vw,36px)}
 .mood{display:inline-flex;align-items:center;gap:8px;background:#fff3cf;color:#7a4f00;font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px}
@@ -98,9 +132,22 @@ p{margin:0 0 12px}p:last-child{margin:0}
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><b>סקירת שווקים</b><span>יום שני · 16.11</span></div>
+  <header class="top">
+    <a class="brand" href="#hero" aria-label="מצב השוק ואני, לראש העמוד">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="url(#bg)"/><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14b8a6"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><polyline points="8,27 15,20 21,24 32,12" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="12" r="3" fill="#fff3cf"/></svg>
+      <span class="bt"><span class="b1">מצב השוק</span> <span class="b2">ואני</span></span>
+    </a>
+    <span class="date">יום שני · 16.11</span>
+    <button type="button" class="menu" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="תפריט"><span></span><span></span><span></span></button>
+  </header>
 
-  <section class="card hero">
+  <nav class="nav" id="nav" aria-label="ניווט בסקירה">
+    <div class="navhead"><b>בסקירה של היום</b><button type="button" id="navX" aria-label="סגירת התפריט">✕</button></div>
+    <ul id="navList"></ul>
+  </nav>
+  <div class="scrim" id="scrim"></div>
+
+  <section class="card hero" id="hero" data-nav="בשורה התחתונה">
     <span class="mood">עצבנות לפני שבוע גדול</span>
     <h1>אנבידיה מושכת את וול סטריט למטה, והדולר קופץ ל-3.24 שקלים</h1>
     <p class="sub">משבר ההנהלה בחברת השבבים הגדולה בעולם מפחיד את שוק הטכנולוגיה, ובישראל השקל נחלש כי הריבית כאן צפויה לרדת.</p>
@@ -111,7 +158,7 @@ p{margin:0 0 12px}p:last-child{margin:0}
     </ul>
   </section>
 
-  <section class="card me">
+  <section class="card me" id="me" data-nav="מה זה אומר עליי">
     <h2>מה זה אומר עליי</h2>
     <ul>
       <li><b>חופשה בחו״ל:</b> דולר ב-3.24 שקלים, לעומת כ-2.82 בסוף מאי. חופשה שמתומחרת בדולרים יקרה היום בכ-15% יותר מאשר בתחילת הקיץ.</li>
@@ -121,7 +168,7 @@ p{margin:0 0 12px}p:last-child{margin:0}
     </ul>
   </section>
 
-  <section class="card">
+  <section class="card" id="numbers" data-nav="המספרים">
     <h2>המספרים</h2>
     <div class="tiles">
       <div class="t"><span><button class="term" data-t="ta125">ת״א 125</button></span><b>3,891.75</b><span class="chg d">▼ 0.7%</span><span class="ctx">ירידה שנייה ברצף</span></div>
@@ -143,20 +190,26 @@ p{margin:0 0 12px}p:last-child{margin:0}
     <p class="note">נתוני וול סטריט, נפט וזהב נכונים לשעת הפרסום, במהלך המסחר, ועשויים להשתנות עד הנעילה.</p>
   </section>
 
-  <section class="card pick">
-    <h2>המניה שלך</h2>
-    <div class="pills" id="pills" role="group" aria-label="בחירת מניה"></div>
+  <section class="card pick" id="stocks" data-nav="המניות שלי">
+    <h2>המניות שלי</h2>
+    <div class="mine"><div class="pills" id="pills" role="group" aria-label="המניות שלי" style="margin:0"></div><button type="button" class="edit" id="editBtn" aria-expanded="false">+ בחירת מניות</button></div>
+    <div class="chooser" id="chooser">
+      <p class="hint">בחר עד 6 מניות למעקב. הבחירה נשמרת במכשיר שלך.</p>
+      <input type="search" id="find" placeholder="חיפוש לפי שם או סימול, למשל טבע או TEVA" aria-label="חיפוש מניה">
+      <div class="opts" id="opts"></div>
+      <button type="button" class="done" id="doneBtn">סיום</button>
+    </div>
     <div class="stock" id="stock" aria-live="polite"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="story" data-nav="הסיפור של היום">
     <h2>הסיפור של היום</h2>
     <p>הסיפור הגדול בעולם הוא אנבידיה. בשבוע שעבר עזב המנכ״ל והמייסד ג׳נסן הואנג אחרי פרסומים על חייו האישיים, וחלקם עוררו חששות ביטחוניים בוושינגטון. מאז המניה איבדה כ-13% בחמישה ימים, לפי Yahoo Finance. היום היא שוב יורדת, ואיתה כל ענף השבבים: בטייוואן המדד צנח ב-6% ובדרום קוריאה ב-3.6%, לפי AP. מחר בערב אנבידיה מפרסמת דוח רבעוני, ובאותו שבוע צפויה גם הנפקת הענק של אנתרופיק. לכן המשקיעים מעדיפים לחכות בצד.</p>
     <p>בישראל הסיפור הוא דווקא השקל. <button class="term" data-t="cpi">מדד המחירים</button> לאוקטובר ירד ב-0.1%, והאינפלציה השנתית ירדה ל-1.1%. מכאן השוק מסיק שבנק ישראל עשוי להוריד את הריבית (היום 3.25%) כבר ביום שני הבא. באותו זמן בארה״ב מדברים על העלאת ריבית בדצמבר. כשהריבית כאן יורדת ושם עולה, יותר משתלם להחזיק דולרים. זה <button class="term" data-t="ratediff">פער ריביות</button>, ולפי ביזפורטל זו אחת הסיבות העיקריות לזינוק בדולר.</p>
     <p>ונתון מעניין מהבוקר: לפי גלובס, המשק הישראלי צמח ברבעון השלישי בקצב שנתי של 8%. בערך חצי מהצמיחה הגיע מפעילות של חברות ישראליות בחו״ל, בעיקר אנבידיה. כלכלן מזרחי טפחות רונן מנחם הזהיר במעריב שצמיחה חזקה כזו עלולה דווקא להקטין את הסיכוי להורדת ריבית. כלומר, לא כולם בטוחים שהיא תגיע.</p>
   </section>
 
-  <section class="card geo">
+  <section class="card geo" id="geo" data-nav="הזווית הגיאופוליטית">
     <h2>הזווית הגיאופוליטית</h2>
     <div class="item"><span class="tag">נפט</span><h3>איראן מתגרה, אבל הנפט לא נבהל</h3><p>לפי Yahoo Finance, איראן תקפה בסיס מסוקים אמריקאי בבחריין, כמה ספינות עלו על מוקשים ונושאת מטוסים אמריקאית שלישית הגיעה לאזור. ובכל זאת הנפט ירד, כי המשלוחים במצר הורמוז כמעט חזרו לרמה שלפני המלחמה, וסוכנות האנרגיה הבינלאומית אומרת שלראשונה מאז פרוץ המלחמה יש יותר נפט מביקוש. כדאי לעקוב: האם התקיפות יפגעו שוב בתנועת המכליות.</p></div>
     <div class="item"><span class="tag">סקטור</span><h3>אנבידיה הפכה לסוגיה פוליטית</h3><p>שר האוצר האמריקאי בסנט קרא להביא מנכ״ל מבחוץ, ואילו הנשיא טראמפ אמר שהחזרת הואנג ״לא רעיון רע״. גם כללים חדשים של משרד המסחר האמריקאי על גישה מרחוק לשבבים מתקדמים מכבידים על הענף. מבחינת ישראל זה חשוב במיוחד, כי לאנבידיה יש כאן פעילות פיתוח גדולה שתורמת לצמיחה.</p></div>
@@ -164,7 +217,7 @@ p{margin:0 0 12px}p:last-child{margin:0}
     <div class="item"><span class="tag">סחר</span><h3>טראמפ בדרך לאסיה</h3><p>הנשיא טראמפ יוצא למסע באסיה, ולפי AP ביום חמישי צפויה פגישה עם נשיא סין שי ונשיא רוסיה פוטין בכנס בשנז׳ן. ברקע, נתוני הכלכלה בסין יצאו חלשים מהצפוי. כל הסכם או מחלוקת על מכסים ושבבים ישפיעו על מניות הטכנולוגיה.</p></div>
   </section>
 
-  <section class="card think">
+  <section class="card think" id="think" data-nav="נקודות למחשבה">
     <h2>נקודות למחשבה</h2>
     <div class="item"><h3>מה אם בנק ישראל יוריד ריבית בשבוע הבא?</h3><p>משכנתאות והלוואות יוזלו מעט. מצד שני, השקל עלול להמשיך להיחלש, וזה מייקר מוצרים מיובאים וחופשות.</p></div>
     <div class="item"><h3>מי מרוויח מהדולר החזק?</h3><p>חברות ישראליות שמוכרות לחו״ל, כמו חברות הייטק ותעשייה. במשך חודשים הן סבלו משקל חזק, ועכשיו כל דולר שהן מרוויחות שווה יותר שקלים.</p></div>
@@ -172,7 +225,7 @@ p{margin:0 0 12px}p:last-child{margin:0}
   </section>
 
   <div class="learn">
-    <section class="card word">
+    <section class="card word" id="word" data-nav="מונח היום">
       <h2>מונח היום</h2>
       <p class="w">פער ריביות</p>
       <p>ההבדל בין הריבית במדינה אחת לריבית במדינה אחרת. כסף נוטה לזרום למקום שבו הוא מקבל ריבית גבוהה יותר, ולכן המטבע של אותה מדינה מתחזק.</p>
@@ -180,13 +233,13 @@ p{margin:0 0 12px}p:last-child{margin:0}
     </section>
   </div>
 
-  <section class="card faq">
+  <section class="card faq" id="faqs" data-nav="שאלות ותשובות">
     <h2>שאלות ותשובות</h2>
     <p class="lead">שאלות שאולי רצית לשאול על היום. לחץ על שאלה כדי לראות את התשובה.</p>
     <div id="faq"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="tomorrow" data-nav="מה לעקוב מחר">
     <h2>מה לעקוב מחר</h2>
     <ul class="cal">
       <li><time>15:30</time><span>מכירות קמעונאיות בארה״ב: מראה כמה האמריקאים מוציאים, ומשפיע על ההערכות לגבי הריבית שם.</span></li>
@@ -197,7 +250,7 @@ p{margin:0 0 12px}p:last-child{margin:0}
     </ul>
   </section>
 
-  <section class="card src">
+  <section class="card src" id="sources" data-nav="מקורות">
     <h2>מקורות</h2>
     <p>
       <a href="https://finance.yahoo.com/markets/live/stock-market-today-monday-november-16-dow-sp-500-nasdaq-nvidia-oil-091631084.html">Yahoo Finance – וול סטריט היום</a> ·
@@ -236,7 +289,22 @@ p{margin:0 0 12px}p:last-child{margin:0}
     {tk:"AAPL",name:"אפל",price:"$356.27",chg:0.4,week:[350.69,348.51,355.63,354.88,356.27],note:"מחיר הנעילה של יום שישי, שיא כל הזמנים. לא מצאנו נתון אמין להיום (לא אומת). אפל מחזיקה מעמד יחסית כי היא כמעט לא מוציאה על חוות שרתים."},
     {tk:"MSFT",name:"מיקרוסופט",price:"$523.88",chg:0.2,week:[545.18,533.16,521.13,523.00,523.88],note:"מחיר הנעילה של יום שישי; לא מצאנו נתון אמין להיום (לא אומת). ברקע: תקלה של כמה ימים בשירותי אופיס 365."},
     {tk:"TSLA",name:"טסלה",price:"$386.20",chg:-1.0,week:[379.78,390.84,397.45,390.22,386.20],note:"ירידה קלה יחד עם הטכנולוגיה (מחיר משוער, לא אומת). ברקע: דיווחים על שיחות מיזוג עם ספייס-X."},
-    {tk:"AMZN",name:"אמזון",price:"$266.66",chg:-0.3,week:[266.93,270.87,266.17,267.44,266.66],note:"מחיר הנעילה של יום שישי; לא מצאנו נתון אמין להיום (לא אומת). בלי חדשות מהותיות היום."}
+    {tk:"AMZN",name:"אמזון",price:"$266.66",chg:-0.3,week:[266.93,270.87,266.17,267.44,266.66],note:"מחיר הנעילה של יום שישי; לא מצאנו נתון אמין להיום (לא אומת). בלי חדשות מהותיות היום."},
+    {tk:"GOOGL",name:"גוגל (אלפבית)",price:null},
+    {tk:"META",name:"מטא",price:null},
+    {tk:"AVGO",name:"ברודקום",price:null},
+    {tk:"AMD",name:"AMD",price:null},
+    {tk:"NFLX",name:"נטפליקס",price:null},
+    {tk:"PLTR",name:"פלנטיר",price:null},
+    {tk:"JPM",name:"ג׳יי.פי מורגן",price:null},
+    {tk:"V",name:"ויזה",price:null},
+    {tk:"KO",name:"קוקה-קולה",price:null},
+    {tk:"TEVA",name:"טבע",price:null},
+    {tk:"CHKP",name:"צ׳ק פוינט",price:null},
+    {tk:"NICE",name:"נייס",price:null},
+    {tk:"WIX",name:"וויקס",price:null},
+    {tk:"MBLY",name:"מובילאיי",price:null},
+    {tk:"ESLT",name:"אלביט מערכות",price:null}
   ];
   const GLOSSARY={
     ta125:["ת״א 125","מדד של 125 החברות הגדולות בבורסה בתל אביב. הוא מראה איך הבורסה המקומית התנהגה באופן כללי."],
@@ -259,21 +327,57 @@ p{margin:0 0 12px}p:last-child{margin:0}
   document.getElementById('faq').innerHTML=FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');
   const STOCK_NOTE="אנבידיה וטסלה: מחיר במהלך המסחר בשעת הפרסום. אפל, מיקרוסופט ואמזון: נעילת יום שישי. הקו מראה 5 ימי מסחר אחרונים.";
 
-  const pills=document.getElementById('pills'),box=document.getElementById('stock');
-  let cur=STOCKS[0].tk;
-  try{const s=localStorage.getItem('pick');if(STOCKS.some(x=>x.tk===s))cur=s}catch(e){}
+  // ===== my stocks (choose up to 6, saved per device) =====
+  const pills=document.getElementById('pills'),box=document.getElementById('stock'),chooser=document.getElementById('chooser'),opts=document.getElementById('opts'),find=document.getElementById('find'),editBtn=document.getElementById('editBtn');
+  const MAX=6,DEF=["NVDA","AAPL","MSFT","TSLA","AMZN"];
+  const byTk=t=>STOCKS.find(x=>x.tk===t);
+  let mine=DEF.slice();
+  try{const m=JSON.parse(localStorage.getItem('mine')||'null');if(Array.isArray(m)){const ok=m.filter(byTk).slice(0,MAX);if(ok.length)mine=ok}}catch(e){}
+  let cur=mine[0];
+  try{const s=localStorage.getItem('pick');if(mine.includes(s))cur=s}catch(e){}
+  const save=()=>{try{localStorage.setItem('mine',JSON.stringify(mine));localStorage.setItem('pick',cur)}catch(e){}};
   const spark=(w,up)=>{if(!w||w.length<2)return'';const mn=Math.min(...w),mx=Math.max(...w),r=mx-mn||1;
     const pts=w.map((v,i)=>`${(i/(w.length-1)*100).toFixed(1)},${(48-(v-mn)/r*40).toFixed(1)}`).join(' ');
     return `<svg class="spark" viewBox="0 0 100 52" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="var(${up?'--up':'--down'})" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`};
   const render=()=>{
-    pills.innerHTML=STOCKS.map(s=>`<button type="button" data-tk="${s.tk}" aria-pressed="${s.tk===cur}">${s.tk}</button>`).join('');
-    const s=STOCKS.find(x=>x.tk===cur),up=s.chg>=0;
+    if(!mine.includes(cur))cur=mine[0];
+    pills.innerHTML=mine.map(t=>`<button type="button" data-tk="${t}" aria-pressed="${t===cur}">${t}</button>`).join('');
+    const s=byTk(cur);
+    if(!s){box.innerHTML='<p>בחר מניה כדי לראות את הנתונים שלה.</p>';return}
+    if(s.price==null){box.innerHTML=`<div><div class="nm">${s.name} · ${s.tk}</div><div class="px">—</div></div><p>הנתונים למניה הזו יופיעו החל מהסקירה הבאה.</p>`;return}
+    const up=s.chg>=0;
     box.innerHTML=`<div><div class="nm">${s.name} · ${s.tk}</div><div class="px">${s.price}</div></div>
       <span class="chg ${up?'u':'d'}">${up?'▲':'▼'} ${Math.abs(s.chg).toFixed(1)}%</span>
       ${spark(s.week,s.week&&s.week[s.week.length-1]>=s.week[0])}<p>${s.note}</p><small>${STOCK_NOTE}</small>`;
   };
-  pills.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.tk;try{localStorage.setItem('pick',cur)}catch(e){}render()});
+  const renderOpts=()=>{
+    const q=find.value.trim().toLowerCase();
+    opts.innerHTML=STOCKS.filter(s=>!q||s.tk.toLowerCase().includes(q)||s.name.includes(q)).map(s=>{
+      const on=mine.includes(s.tk),dis=!on&&mine.length>=MAX;
+      return `<label><input type="checkbox" value="${s.tk}" ${on?'checked':''} ${dis?'disabled':''}>${s.name} <small>${s.tk}</small></label>`}).join('')||'<p class="hint">לא נמצאה מניה. אפשר לבקש להוסיף אותה לרשימה.</p>';
+  };
+  pills.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.tk;save();render()});
+  editBtn.addEventListener('click',()=>{const on=chooser.classList.toggle('on');editBtn.setAttribute('aria-expanded',on);if(on){find.value='';renderOpts()}});
+  find.addEventListener('input',renderOpts);
+  opts.addEventListener('change',e=>{const t=e.target.value;if(e.target.checked){if(mine.length<MAX&&!mine.includes(t)){mine.push(t);cur=t}}else{if(mine.length>1)mine=mine.filter(x=>x!==t);else e.target.checked=true}save();render();renderOpts()});
+  document.getElementById('doneBtn').addEventListener('click',()=>{chooser.classList.remove('on');editBtn.setAttribute('aria-expanded','false')});
   render();
+
+  // ===== side navigation =====
+  const nav=document.getElementById('nav'),navList=document.getElementById('navList'),scrim=document.getElementById('scrim'),menuBtn=document.getElementById('menuBtn');
+  const secs=[...document.querySelectorAll('[data-nav]')];
+  navList.innerHTML=secs.map(x=>`<li><a href="#${x.id}">${x.dataset.nav}</a></li>`).join('');
+  const setNav=on=>{nav.classList.toggle('on',on);scrim.classList.toggle('on',on);menuBtn.setAttribute('aria-expanded',on)};
+  menuBtn.addEventListener('click',()=>setNav(!nav.classList.contains('on')));
+  document.getElementById('navX').addEventListener('click',()=>setNav(false));
+  scrim.addEventListener('click',()=>setNav(false));
+  navList.addEventListener('click',e=>{if(e.target.closest('a'))setNav(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setNav(false)});
+  if('IntersectionObserver' in window){
+    const links=navList.querySelectorAll('a');
+    const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+en.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});
+    secs.forEach(x=>io.observe(x));
+  }
 
   const sheet=document.getElementById('sheet'),shT=document.getElementById('sh-t'),shD=document.getElementById('sh-d');
   document.addEventListener('click',e=>{
