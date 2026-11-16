@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-title" content="סקירת שווקים">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f2f8f7">
+<title>סקירת שווקים יומית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap">
+<style>
+:root{color-scheme:light dark;
+--bg:light-dark(#f2f8f7,#0f1719);--card:light-dark(#ffffff,#172225);--ink:light-dark(#17252b,#e7f1f1);
+--mute:light-dark(#62737a,#93a8ad);--line:light-dark(#e3eeec,#25353a);--teal:light-dark(#0e9f8e,#3fd1bf);
+--mint:light-dark(#e3f6f2,#173430);--skysoft:light-dark(#e8f1ff,#1a2a44);--sun:light-dark(#fff3cf,#3a3216)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Assistant",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:max(env(safe-area-inset-top),20px) 16px 40px}
+.top{padding:8px 4px 16px;color:var(--teal);font-size:17px;font-weight:800}
+.card{background:var(--card);border-radius:22px;padding:clamp(20px,4vw,30px);margin-bottom:14px;box-shadow:0 1px 2px rgb(0 0 0/.04),0 8px 28px rgb(14 159 142/.07)}
+.hero{background:linear-gradient(160deg,light-dark(#e6f4f1,#1a2e2c) 0%,light-dark(#edf3fb,#1b2533) 100%)}
+.mood{display:inline-flex;align-items:center;gap:8px;background:#fff3cf;color:#7a4f00;font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px}
+.mood::before{content:"";width:8px;height:8px;border-radius:50%;background:#f59e0b}
+h1{font-size:clamp(28px,6vw,40px);line-height:1.15;font-weight:800;margin:16px 0 8px;text-wrap:balance}
+.sub{color:var(--mute);font-size:18px;margin:0}
+.time{font-size:clamp(44px,10vw,64px);font-weight:800;color:var(--teal);line-height:1}
+ul{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+.foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">סקירת שווקים</div>
+  <section class="card hero">
+    <span class="mood">בקרוב</span>
+    <h1>המהדורה הראשונה בדרך</h1>
+    <p class="sub">כל ערב מסחר העמוד הזה מתעדכן בסקירה חדשה: מה הזיז את השווקים, איך הגיאופוליטיקה משפיעה, ומה זה אומר עליך.</p>
+  </section>
+  <section class="card">
+    <p style="margin:0 0 6px;color:var(--mute)">מתעדכן בימים א׳–ה׳ בערך ב-</p>
+    <div class="time">18:15</div>
+  </section>
+  <section class="card">
+    <ul>
+      <li>הבשורה התחתונה בשלוש שורות</li>
+      <li>מה זה אומר עליך: דולר, דלק, משכנתא ופנסיה</li>
+      <li>המספרים, ומניה לבחירתך מוול סטריט</li>
+      <li>הזווית הגיאופוליטית ונקודות למחשבה</li>
+      <li>מונח היום ושאלות ותשובות למתחילים</li>
+    </ul>
+  </section>
+  <p class="foot">הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>קרדיט: אדם שימקייביץ</p>
+</div>
+</body>
+</html>
