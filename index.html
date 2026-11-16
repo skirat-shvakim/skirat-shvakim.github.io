@@ -5,52 +5,285 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-title" content="סקירת שווקים">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#f2f8f7">
 <title>סקירת שווקים יומית</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap">
 <style>
 :root{color-scheme:light dark;
 --bg:light-dark(#f2f8f7,#0f1719);--card:light-dark(#ffffff,#172225);--ink:light-dark(#17252b,#e7f1f1);
---mute:light-dark(#62737a,#93a8ad);--line:light-dark(#e3eeec,#25353a);--teal:light-dark(#0e9f8e,#3fd1bf);
---mint:light-dark(#e3f6f2,#173430);--skysoft:light-dark(#e8f1ff,#1a2a44);--sun:light-dark(#fff3cf,#3a3216)}
+--mute:light-dark(#62737a,#93a8ad);--line:light-dark(#e3eeec,#25353a);
+--teal:light-dark(#0e9f8e,#3fd1bf);--sky:light-dark(#2b7fff,#78acff);--coral:light-dark(#e2574a,#ff8a7d);
+--mint:light-dark(#e3f6f2,#173430);--skysoft:light-dark(#e8f1ff,#1a2a44);--sun:light-dark(#fff3cf,#3a3216);--sunink:light-dark(#8a5a00,#ffd36e);
+--up:light-dark(#0b8a5f,#4fd99a);--upbg:light-dark(#dff6ec,#143426);--down:light-dark(#d23c3c,#ff8a8a);--downbg:light-dark(#fde8e8,#3a1c20)}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Assistant",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Assistant",system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
 .wrap{max-width:720px;margin:0 auto;padding:max(env(safe-area-inset-top),20px) 16px 40px}
-.top{padding:8px 4px 16px;color:var(--teal);font-size:17px;font-weight:800}
+.top{display:flex;justify-content:space-between;align-items:center;padding:8px 4px 16px;color:var(--mute);font-size:14px}
+.top b{color:var(--teal);font-size:17px;font-weight:800}
 .card{background:var(--card);border-radius:22px;padding:clamp(20px,4vw,30px);margin-bottom:14px;box-shadow:0 1px 2px rgb(0 0 0/.04),0 8px 28px rgb(14 159 142/.07)}
-.hero{background:linear-gradient(160deg,light-dark(#e6f4f1,#1a2e2c) 0%,light-dark(#edf3fb,#1b2533) 100%)}
+.hero{background:linear-gradient(160deg,light-dark(#e6f4f1,#1a2e2c) 0%,light-dark(#edf3fb,#1b2533) 100%);color:var(--ink);padding-top:clamp(24px,5vw,36px)}
 .mood{display:inline-flex;align-items:center;gap:8px;background:#fff3cf;color:#7a4f00;font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px}
 .mood::before{content:"";width:8px;height:8px;border-radius:50%;background:#f59e0b}
 h1{font-size:clamp(28px,6vw,40px);line-height:1.15;font-weight:800;margin:16px 0 8px;text-wrap:balance}
-.sub{color:var(--mute);font-size:18px;margin:0}
-.time{font-size:clamp(44px,10vw,64px);font-weight:800;color:var(--teal);line-height:1}
-ul{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+.sub{color:var(--mute);font-size:18px;margin:0 0 22px}
+.bottom{list-style:none;margin:0;padding:16px;background:light-dark(rgb(255 255 255/.75),rgb(255 255 255/.05));border-radius:16px;display:grid;gap:10px}
+.bottom li{padding-inline-start:20px;position:relative}
+.bottom li::before{content:"";position:absolute;inset-inline-start:0;top:.65em;width:9px;height:9px;border-radius:50%;background:var(--teal)}
+h2{font-size:21px;font-weight:800;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--c,var(--teal));flex:none}
+.me{--c:var(--sunink);background:var(--sun);box-shadow:none}
+.me ul{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.t{background:var(--bg);border-radius:16px;padding:14px}
+.t:nth-child(4n+1){background:var(--mint)}.t:nth-child(4n+2){background:var(--skysoft)}.t:nth-child(4n+3){background:var(--sun)}
+.t span{display:block;color:var(--mute);font-size:14px}
+.t b{display:block;font-size:22px;font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
+.chg{display:inline-block;font-weight:800;font-size:14px;padding:2px 9px;border-radius:8px;direction:ltr;font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:6px}
+.u{color:var(--up);background:var(--upbg)}.d{color:var(--down);background:var(--downbg)}
+.t .ctx{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-top:6px}
+.t .ctx.hot{color:var(--coral)}
+details.adv{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+details.adv summary{cursor:pointer;font-weight:700;color:var(--sky);min-height:44px;display:flex;align-items:center}
+details.adv .tiles{margin-top:8px}
+.note{font-size:13px;color:var(--mute);margin:12px 0 0}
+.pick{--c:var(--sky)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pills button{font:700 15px "Assistant",sans-serif;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;direction:ltr}
+.pills button[aria-pressed=true]{background:var(--sky);border-color:var(--sky);color:#fff}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.stock{background:var(--skysoft);border-radius:18px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:end}
+.stock .nm{font-size:15px;color:var(--mute)}
+.stock .px{font-size:clamp(32px,8vw,44px);font-weight:800;line-height:1.1;direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+.stock .chg{font-size:16px;margin:0 0 8px}
+.stock p{grid-column:1/-1;margin:8px 0 0;font-size:16px}
+.stock small{grid-column:1/-1;color:var(--mute);font-size:13px}
+.spark{grid-column:1/-1;height:56px;width:100%}
+p{margin:0 0 12px}p:last-child{margin:0}
+.item{padding:16px 0;border-top:1px solid var(--line)}.item:first-of-type{border-top:0;padding-top:0}
+.item h3{font-size:18px;margin:0 0 4px}
+.tag{display:inline-block;font-size:13px;font-weight:800;color:var(--coral);background:light-dark(#ffece9,#3a201c);padding:2px 10px;border-radius:999px;margin-bottom:6px}
+.geo{--c:var(--coral)}
+.think{--c:var(--sky);background:linear-gradient(160deg,var(--skysoft),var(--mint))}
+.think .item{border-color:light-dark(#cfe2f3,#2a3d4a)}
+.think .item h3{color:var(--sky)}
+.learn{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:14px}
+.learn .card{margin:0}
+.word{--c:var(--teal)}
+.word .w{font-size:26px;font-weight:800;color:var(--teal);margin:0 0 6px}
+.word .ex{background:var(--mint);border-radius:12px;padding:10px 12px;font-size:15px;margin-top:10px}
+.faq{--c:var(--sunink)}
+.faq .lead{color:var(--mute);font-size:15px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:first-child{border-top:0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:8px 0;font-weight:700;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:28px;height:28px;border-radius:50%;background:var(--sun);color:var(--sunink);display:grid;place-items:center;font-weight:800}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin:0 0 14px;background:var(--sun);border-radius:12px;padding:12px 14px;font-size:16px}
+.term{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:help;text-decoration:underline dotted var(--teal) 2px;text-underline-offset:4px}
+.cal{list-style:none;margin:0;padding:0}
+.cal li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.cal li:first-child{border-top:0;padding-top:0}
+.cal time{font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.src a{color:var(--sky);text-decoration:none;font-weight:600}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:9;display:none;padding:0 12px max(env(safe-area-inset-bottom),12px)}
+.sheet.on{display:block}
+.sheet>div{max-width:640px;margin:0 auto;background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:0 -6px 40px rgb(0 0 0/.18)}
+.sheet h3{margin:0 0 6px;font-size:19px;color:var(--teal)}
+.sheet .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sheet button{font:700 15px "Assistant",sans-serif;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+@media (prefers-reduced-motion:no-preference){.sheet.on>div{animation:up .2s ease-out}@keyframes up{from{transform:translateY(20px);opacity:0}}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top">סקירת שווקים</div>
+  <div class="top"><b>סקירת שווקים</b><span>יום שני · 16.11</span></div>
+
   <section class="card hero">
-    <span class="mood">בקרוב</span>
-    <h1>המהדורה הראשונה בדרך</h1>
-    <p class="sub">כל ערב מסחר העמוד הזה מתעדכן בסקירה חדשה: מה הזיז את השווקים, איך הגיאופוליטיקה משפיעה, ומה זה אומר עליך.</p>
-  </section>
-  <section class="card">
-    <p style="margin:0 0 6px;color:var(--mute)">מתעדכן בימים א׳–ה׳ בערך ב-</p>
-    <div class="time">18:15</div>
-  </section>
-  <section class="card">
-    <ul>
-      <li>הבשורה התחתונה בשלוש שורות</li>
-      <li>מה זה אומר עליך: דולר, דלק, משכנתא ופנסיה</li>
-      <li>המספרים, ומניה לבחירתך מוול סטריט</li>
-      <li>הזווית הגיאופוליטית ונקודות למחשבה</li>
-      <li>מונח היום ושאלות ותשובות למתחילים</li>
+    <span class="mood">עצבנות לפני שבוע גדול</span>
+    <h1>אנבידיה מושכת את וול סטריט למטה, והדולר קופץ ל-3.24 שקלים</h1>
+    <p class="sub">משבר ההנהלה בחברת השבבים הגדולה בעולם מפחיד את שוק הטכנולוגיה, ובישראל השקל נחלש כי הריבית כאן צפויה לרדת.</p>
+    <ul class="bottom">
+      <li>הדולר עלה בכ-1.6% והגיע לרמה הכי גבוהה שלו מאז דצמבר 2025.</li>
+      <li>הבורסה בתל אביב ירדה ביום השני ברציפות: <button class="term" data-t="ta125">ת״א 125</button> איבד 0.7%.</li>
+      <li>בוול סטריט הנאסד״ק יורד בכ-1.6%, יום לפני ה<button class="term" data-t="earnings">דוח הרבעוני</button> של אנבידיה.</li>
     </ul>
   </section>
-  <p class="foot">הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>קרדיט: אדם שימקייביץ</p>
+
+  <section class="card me">
+    <h2>מה זה אומר עליי</h2>
+    <ul>
+      <li><b>חופשה בחו״ל:</b> דולר ב-3.24 שקלים, לעומת כ-2.82 בסוף מאי. חופשה שמתומחרת בדולרים יקרה היום בכ-15% יותר מאשר בתחילת הקיץ.</li>
+      <li><b>משכנתא וריבית:</b> המחירים בישראל כמעט לא עולים, ולכן ייתכן שבנק ישראל יוריד את הריבית כבר ביום שני הבא. אם זה יקרה, ההחזר החודשי על מסלול הפריים יירד מעט.</li>
+      <li><b>תחנת הדלק:</b> הנפט ירד הרבה בשבועות האחרונים, אבל דולר יקר מקזז חלק מזה, כי את הנפט קונים בדולרים.</li>
+      <li><b>פנסיה וחיסכון:</b> המניות בעולם ירדו היום, אבל הדולר החזק ממתן את הירידה במונחי שקלים לחלק של החיסכון שמושקע בחו״ל.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>המספרים</h2>
+    <div class="tiles">
+      <div class="t"><span><button class="term" data-t="ta125">ת״א 125</button></span><b>3,891.75</b><span class="chg d">▼ 0.7%</span><span class="ctx">ירידה שנייה ברצף</span></div>
+      <div class="t"><span><button class="term" data-t="sp500">S&amp;P 500</button> · במהלך המסחר</span><b>7,480</b><span class="chg d">▼ 1.1%</span><span class="ctx">ירידה שנייה ברצף</span></div>
+      <div class="t"><span>נאסד״ק · במהלך המסחר</span><b>24,735</b><span class="chg d">▼ 1.6%</span><span class="ctx hot">ירידה חדה, השבבים מובילים</span></div>
+      <div class="t"><span>דולר / שקל</span><b>3.24</b><span class="chg u">▲ 1.6%</span><span class="ctx hot">הכי גבוה מאז דצמבר 2025</span></div>
+      <div class="t"><span>נפט ברנט</span><b>$95.3</b><span class="chg d">▼ 0.6%</span><span class="ctx">רחוק מאוד מ-107$ בתחילת החודש</span></div>
+      <div class="t"><span>זהב</span><b>$3,866</b><span class="chg d">▼ 0.5%</span><span class="ctx">יום רגיל</span></div>
+    </div>
+    <details class="adv">
+      <summary>עוד נתונים, למתקדמים</summary>
+      <div class="tiles">
+        <div class="t"><span>יורו / שקל</span><b>3.56</b><span class="ctx">עלה יחד עם הדולר</span></div>
+        <div class="t"><span><button class="term" data-t="yield">תשואת אג״ח</button> ארה״ב, 10 שנים</span><b>5.13%</b><span class="chg d">▼ 0.03</span><span class="ctx">עדיין מעל 5%</span></div>
+        <div class="t"><span>תשואת אג״ח ישראל, 10 שנים</span><b>—</b><span class="ctx">לא אומת היום</span></div>
+        <div class="t"><span>ביטקוין</span><b>$64,300</b><span class="chg d">▼ 0.5%</span><span class="ctx hot">קרוב לשפל מאז יולי</span></div>
+      </div>
+    </details>
+    <p class="note">נתוני וול סטריט, נפט וזהב נכונים לשעת הפרסום, במהלך המסחר, ועשויים להשתנות עד הנעילה.</p>
+  </section>
+
+  <section class="card pick">
+    <h2>המניה שלך</h2>
+    <div class="pills" id="pills" role="group" aria-label="בחירת מניה"></div>
+    <div class="stock" id="stock" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h2>הסיפור של היום</h2>
+    <p>הסיפור הגדול בעולם הוא אנבידיה. בשבוע שעבר עזב המנכ״ל והמייסד ג׳נסן הואנג אחרי פרסומים על חייו האישיים, וחלקם עוררו חששות ביטחוניים בוושינגטון. מאז המניה איבדה כ-13% בחמישה ימים, לפי Yahoo Finance. היום היא שוב יורדת, ואיתה כל ענף השבבים: בטייוואן המדד צנח ב-6% ובדרום קוריאה ב-3.6%, לפי AP. מחר בערב אנבידיה מפרסמת דוח רבעוני, ובאותו שבוע צפויה גם הנפקת הענק של אנתרופיק. לכן המשקיעים מעדיפים לחכות בצד.</p>
+    <p>בישראל הסיפור הוא דווקא השקל. <button class="term" data-t="cpi">מדד המחירים</button> לאוקטובר ירד ב-0.1%, והאינפלציה השנתית ירדה ל-1.1%. מכאן השוק מסיק שבנק ישראל עשוי להוריד את הריבית (היום 3.25%) כבר ביום שני הבא. באותו זמן בארה״ב מדברים על העלאת ריבית בדצמבר. כשהריבית כאן יורדת ושם עולה, יותר משתלם להחזיק דולרים. זה <button class="term" data-t="ratediff">פער ריביות</button>, ולפי ביזפורטל זו אחת הסיבות העיקריות לזינוק בדולר.</p>
+    <p>ונתון מעניין מהבוקר: לפי גלובס, המשק הישראלי צמח ברבעון השלישי בקצב שנתי של 8%. בערך חצי מהצמיחה הגיע מפעילות של חברות ישראליות בחו״ל, בעיקר אנבידיה. כלכלן מזרחי טפחות רונן מנחם הזהיר במעריב שצמיחה חזקה כזו עלולה דווקא להקטין את הסיכוי להורדת ריבית. כלומר, לא כולם בטוחים שהיא תגיע.</p>
+  </section>
+
+  <section class="card geo">
+    <h2>הזווית הגיאופוליטית</h2>
+    <div class="item"><span class="tag">נפט</span><h3>איראן מתגרה, אבל הנפט לא נבהל</h3><p>לפי Yahoo Finance, איראן תקפה בסיס מסוקים אמריקאי בבחריין, כמה ספינות עלו על מוקשים ונושאת מטוסים אמריקאית שלישית הגיעה לאזור. ובכל זאת הנפט ירד, כי המשלוחים במצר הורמוז כמעט חזרו לרמה שלפני המלחמה, וסוכנות האנרגיה הבינלאומית אומרת שלראשונה מאז פרוץ המלחמה יש יותר נפט מביקוש. כדאי לעקוב: האם התקיפות יפגעו שוב בתנועת המכליות.</p></div>
+    <div class="item"><span class="tag">סקטור</span><h3>אנבידיה הפכה לסוגיה פוליטית</h3><p>שר האוצר האמריקאי בסנט קרא להביא מנכ״ל מבחוץ, ואילו הנשיא טראמפ אמר שהחזרת הואנג ״לא רעיון רע״. גם כללים חדשים של משרד המסחר האמריקאי על גישה מרחוק לשבבים מתקדמים מכבידים על הענף. מבחינת ישראל זה חשוב במיוחד, כי לאנבידיה יש כאן פעילות פיתוח גדולה שתורמת לצמיחה.</p></div>
+    <div class="item"><span class="tag">שקל</span><h3>אי-ודאות פוליטית בישראל</h3><p>אייזנקוט עדיין מנסה להרכיב ממשלה, והמגעים עם הליכוד תקועים, לפי ynet. בתחילת החודש החשש ממשבר פוליטי הפיל את הבורסה, לפי ישראל היום. היום הגורם המרכזי בשקל היה הריבית, אבל כל התקדמות או תקיעות במגעים יכולה להזיז אותו.</p></div>
+    <div class="item"><span class="tag">סחר</span><h3>טראמפ בדרך לאסיה</h3><p>הנשיא טראמפ יוצא למסע באסיה, ולפי AP ביום חמישי צפויה פגישה עם נשיא סין שי ונשיא רוסיה פוטין בכנס בשנז׳ן. ברקע, נתוני הכלכלה בסין יצאו חלשים מהצפוי. כל הסכם או מחלוקת על מכסים ושבבים ישפיעו על מניות הטכנולוגיה.</p></div>
+  </section>
+
+  <section class="card think">
+    <h2>נקודות למחשבה</h2>
+    <div class="item"><h3>מה אם בנק ישראל יוריד ריבית בשבוע הבא?</h3><p>משכנתאות והלוואות יוזלו מעט. מצד שני, השקל עלול להמשיך להיחלש, וזה מייקר מוצרים מיובאים וחופשות.</p></div>
+    <div class="item"><h3>מי מרוויח מהדולר החזק?</h3><p>חברות ישראליות שמוכרות לחו״ל, כמו חברות הייטק ותעשייה. במשך חודשים הן סבלו משקל חזק, ועכשיו כל דולר שהן מרוויחות שווה יותר שקלים.</p></div>
+    <div class="item"><h3>מה אם כולם טועים?</h3><p>השוק מתמקד במשבר ההנהלה, אבל אנבידיה עקפה את התחזיות שש פעמים ברציפות, והאנליסטים מצפים לקפיצה של כ-91% בהכנסות. דוח חזק מחר עשוי להזכיר שהעסק עצמו לא השתנה.</p></div>
+  </section>
+
+  <div class="learn">
+    <section class="card word">
+      <h2>מונח היום</h2>
+      <p class="w">פער ריביות</p>
+      <p>ההבדל בין הריבית במדינה אחת לריבית במדינה אחרת. כסף נוטה לזרום למקום שבו הוא מקבל ריבית גבוהה יותר, ולכן המטבע של אותה מדינה מתחזק.</p>
+      <p class="ex">דוגמה מהיום: בישראל הריבית צפויה לרדת, ובארה״ב מדברים על העלאה. הפער לטובת אמריקה גדל, ולכן הדולר זינק מול השקל בכ-1.6%.</p>
+    </section>
+  </div>
+
+  <section class="card faq">
+    <h2>שאלות ותשובות</h2>
+    <p class="lead">שאלות שאולי רצית לשאול על היום. לחץ על שאלה כדי לראות את התשובה.</p>
+    <div id="faq"></div>
+  </section>
+
+  <section class="card">
+    <h2>מה לעקוב מחר</h2>
+    <ul class="cal">
+      <li><time>15:30</time><span>מכירות קמעונאיות בארה״ב: מראה כמה האמריקאים מוציאים, ומשפיע על ההערכות לגבי הריבית שם.</span></li>
+      <li><time>23:20</time><span>הדוח הרבעוני של אנבידיה (בערך, אחרי סגירת המסחר בניו יורק): האירוע הכי חשוב השבוע לשוק הטכנולוגיה.</span></li>
+      <li><time>רביעי</time><span>פרוטוקול הפד ותמחור הנפקת אנתרופיק: רמזים על הריבית בארה״ב, ומבחן לתיאבון של המשקיעים.</span></li>
+      <li><time>חמישי</time><span>פגישת טראמפ, שי ופוטין בסין: סחר, מכסים ושבבים על השולחן.</span></li>
+      <li><time>23.11</time><span>החלטת הריבית של בנק ישראל: האם תהיה הורדה, ומה זה יעשה למשכנתא ולשקל.</span></li>
+    </ul>
+  </section>
+
+  <section class="card src">
+    <h2>מקורות</h2>
+    <p>
+      <a href="https://finance.yahoo.com/markets/live/stock-market-today-monday-november-16-dow-sp-500-nasdaq-nvidia-oil-091631084.html">Yahoo Finance – וול סטריט היום</a> ·
+      <a href="https://www.bnnbloomberg.ca/markets/nasdaq/2026/11/16/stocks-decline-on-tech-sell-off-as-concerns-over-the-nvidia-fallout-persist/">AP / BNN Bloomberg – השווקים בעולם</a> ·
+      <a href="https://www.stocktitan.net/articles/stock-market-today-live-november-16-2026">StockTitan – אנבידיה ושבבים</a> ·
+      <a href="https://finance.yahoo.com/markets/stocks/articles/nvidia-falls-4-ahead-earnings-141051719.html">Yahoo Finance – אנבידיה לפני הדוח</a> ·
+      <a href="https://www.tipranks.com/news/stock-market-today-nov-16-u-s-stocks-mixed-ahead-of-nvidia-results-and-anthropic-ipo">TipRanks – השבוע בשווקים</a> ·
+      <a href="https://quantpartners.substack.com/p/morning-note-111626-america-loves">Quant Partners – תשואות והנפקת אנתרופיק</a> ·
+      <a href="https://eurasiabusinessnews.com/2026/11/16/u-s-stock-market-today-november-16-2026-nvidia-earnings-loom-as-oil-slips-and-gold-struggles/">Eurasia Business News – נפט וזהב</a> ·
+      <a href="https://www.todayinoilandgas.com/2026/11/16/oil-prices-struggle-for-direction-as-middle-east-supply-recovers-wti-near-89-brent-below-96/">Today in Oil and Gas – נפט</a> ·
+      <a href="https://www.bizportal.co.il/forex/news/article/20048805">ביזפורטל – הדולר ב-3.24</a> ·
+      <a href="https://www.bizportal.co.il/capitalmarket/indices/generalview/33333333">ביזפורטל – מדד ת״א 125</a> ·
+      <a href="https://www.themarker.com/markets/2026-11-16/ty-article-live/000001a1-e304-ddc9-abb7-efc6c26e0000">TheMarker – סגירה בבורסה</a> ·
+      <a href="https://en.globes.co.il/en/article-israels-economy-grew-at-8-in-q3-1001563573">גלובס – צמיחה של 8%</a> ·
+      <a href="https://www.maariv.co.il/economy/israel/article-1388967">מעריב – הנתון שמקרב את הורדת הריבית</a> ·
+      <a href="https://www.ynetnews.com/article/bjnjwzw0gx">ynet – המגעים להרכבת ממשלה</a> ·
+      <a href="https://www.israelhayom.co.il/business/article/21789661">ישראל היום – הבורסה והמשבר הפוליטי</a> ·
+      <a href="https://stocktwits.com/news-articles/markets/equity/tsla-spcx-retail-split-merger-winner-could-spacex-get-tesla-sp500-seat/cNb7KL4R9Xm">Stocktwits – טסלה וספייס-X</a> ·
+      <a href="https://stockanalysis.com/stocks/aapl/history/">StockAnalysis – מחירי המניות</a>
+    </p>
+  </section>
+
+  <p class="foot">הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>קרדיט: אדם שימקייביץ<br>עודכן: 16.11.2026 18:40</p>
 </div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sh-t">
+  <div><h3 id="sh-t"></h3><p id="sh-d"></p>
+    <div class="row"><button type="button" id="sh-x">סגור</button></div>
+  </div>
+</div>
+
+<script>
+{
+  const STOCKS=[
+    {tk:"NVDA",name:"אנבידיה",price:"$159.61",chg:-2.0,week:[168.89,173.73,166.19,162.85,159.61],note:"הלחץ נמשך אחרי עזיבת המנכ״ל ג׳נסן הואנג. מחר בערב החברה מפרסמת דוח רבעוני."},
+    {tk:"AAPL",name:"אפל",price:"$356.27",chg:0.4,week:[350.69,348.51,355.63,354.88,356.27],note:"מחיר הנעילה של יום שישי, שיא כל הזמנים. לא מצאנו נתון אמין להיום (לא אומת). אפל מחזיקה מעמד יחסית כי היא כמעט לא מוציאה על חוות שרתים."},
+    {tk:"MSFT",name:"מיקרוסופט",price:"$523.88",chg:0.2,week:[545.18,533.16,521.13,523.00,523.88],note:"מחיר הנעילה של יום שישי; לא מצאנו נתון אמין להיום (לא אומת). ברקע: תקלה של כמה ימים בשירותי אופיס 365."},
+    {tk:"TSLA",name:"טסלה",price:"$386.20",chg:-1.0,week:[379.78,390.84,397.45,390.22,386.20],note:"ירידה קלה יחד עם הטכנולוגיה (מחיר משוער, לא אומת). ברקע: דיווחים על שיחות מיזוג עם ספייס-X."},
+    {tk:"AMZN",name:"אמזון",price:"$266.66",chg:-0.3,week:[266.93,270.87,266.17,267.44,266.66],note:"מחיר הנעילה של יום שישי; לא מצאנו נתון אמין להיום (לא אומת). בלי חדשות מהותיות היום."}
+  ];
+  const GLOSSARY={
+    ta125:["ת״א 125","מדד של 125 החברות הגדולות בבורסה בתל אביב. הוא מראה איך הבורסה המקומית התנהגה באופן כללי."],
+    sp500:["S&P 500","מדד של 500 החברות הגדולות בארה״ב. הרבה קרנות פנסיה והשתלמות בישראל משקיעות בו."],
+    earnings:["דוח רבעוני","פעם בשלושה חודשים חברה ציבורית מפרסמת כמה כסף הכניסה וכמה הרוויחה. אם התוצאות טובות או גרועות מהצפוי, המניה יכולה לזוז בחדות."],
+    cpi:["מדד המחירים לצרכן","מספר שמודד כמה השתנו המחירים של סל מוצרים ושירותים שמשפחה ממוצעת קונה. כשהוא עולה מהר, זו אינפלציה."],
+    ratediff:["פער ריביות","ההבדל בין הריבית בשתי מדינות. כסף נוטה לזרום למקום שמשלם ריבית גבוהה יותר, וזה מחזק את המטבע שלו."],
+    yield:["תשואת אג״ח","הריבית שמקבל מי שמלווה כסף לממשלה. כשהיא עולה, הלוואות ומשכנתאות נוטות להתייקר."],
+    ipo:["הנפקה","הרגע שבו חברה פרטית מוכרת לראשונה מניות לציבור בבורסה. מאותו יום כל אחד יכול לקנות ולמכור את המניה שלה."],
+    hedge:["גידור מטבעי","פעולה שמגינה על השקעה בחו״ל מפני שינויים בשער המטבע. גופים כמו קרנות פנסיה קונים או מוכרים דולרים כדי לשמור על האיזון."]
+  };
+  const FAQ=[
+    ["למה הדולר קפץ דווקא היום?","שתי סיבות עיקריות. מדד המחירים בישראל יצא נמוך, ולכן השוק מעריך שבנק ישראל יוריד ריבית. בארה״ב, לעומת זאת, מדברים על העלאת ריבית. כשהריבית בדולר גבוהה יותר, משקיעים מעדיפים להחזיק דולרים. גם גופים מוסדיים קנו דולרים במסגרת <button class=\"term\" data-t=\"hedge\">גידור מטבעי</button> אחרי הירידות בוול סטריט."],
+    ["למה בעיה של חברה אחת, אנבידיה, מפילה את כל השוק?","אנבידיה היא אחת החברות הגדולות בעולם, ויש לה משקל גדול במדדים כמו ה-S&P 500 והנאסד״ק. היא גם הסמל של כל גל הבינה המלאכותית. כשמשקיעים חוששים לגביה, הם מוכרים גם מניות של חברות שבבים אחרות שתלויות באותו גל."],
+    ["מה זה הנפקת אנתרופיק שכולם מדברים עליה?","אנתרופיק היא חברת בינה מלאכותית שמתכננת להתחיל להיסחר בבורסה בנאסד״ק ביום חמישי. זו עשויה להיות ה<button class=\"term\" data-t=\"ipo\">הנפקה</button> הגדולה בהיסטוריה. הנפקה כזו מושכת הרבה כסף, ולכן היא יכולה להשפיע על מניות טכנולוגיה אחרות."],
+    ["מדד המחירים ירד. אז המחירים בסופר ירדו?","לא בדיוק. המדד ירד ב-0.1% בחודש אחד, כלומר בממוצע המחירים כמעט לא השתנו. חלק מהמוצרים התייקרו וחלק הוזלו. בשנה האחרונה המחירים עלו ב-1.1% בלבד, שזה קצב נמוך."],
+    ["מה זה קרן מחקה?","קרן שקונה בדיוק את המניות שבתוך מדד מסוים, למשל ת״א 125 או S&P 500, באותם משקלים. כך, בקנייה אחת, מקבלים חשיפה להרבה חברות. הדמי ניהול בקרנות כאלה בדרך כלל נמוכים יחסית."],
+    ["למה מניה יכולה לרדת גם כשהחברה מרוויחה הרבה?","מחיר מניה משקף את מה שהמשקיעים מצפים שיקרה בעתיד, לא רק את מה שקרה. אם הציפיות היו גבוהות מאוד, או שיש חשש חדש, כמו עזיבת מנכ״ל, המניה יכולה לרדת גם כשהרווחים מצוינים."]
+  ];
+  document.getElementById('faq').innerHTML=FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');
+  const STOCK_NOTE="אנבידיה וטסלה: מחיר במהלך המסחר בשעת הפרסום. אפל, מיקרוסופט ואמזון: נעילת יום שישי. הקו מראה 5 ימי מסחר אחרונים.";
+
+  const pills=document.getElementById('pills'),box=document.getElementById('stock');
+  let cur=STOCKS[0].tk;
+  try{const s=localStorage.getItem('pick');if(STOCKS.some(x=>x.tk===s))cur=s}catch(e){}
+  const spark=(w,up)=>{if(!w||w.length<2)return'';const mn=Math.min(...w),mx=Math.max(...w),r=mx-mn||1;
+    const pts=w.map((v,i)=>`${(i/(w.length-1)*100).toFixed(1)},${(48-(v-mn)/r*40).toFixed(1)}`).join(' ');
+    return `<svg class="spark" viewBox="0 0 100 52" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="var(${up?'--up':'--down'})" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`};
+  const render=()=>{
+    pills.innerHTML=STOCKS.map(s=>`<button type="button" data-tk="${s.tk}" aria-pressed="${s.tk===cur}">${s.tk}</button>`).join('');
+    const s=STOCKS.find(x=>x.tk===cur),up=s.chg>=0;
+    box.innerHTML=`<div><div class="nm">${s.name} · ${s.tk}</div><div class="px">${s.price}</div></div>
+      <span class="chg ${up?'u':'d'}">${up?'▲':'▼'} ${Math.abs(s.chg).toFixed(1)}%</span>
+      ${spark(s.week,s.week&&s.week[s.week.length-1]>=s.week[0])}<p>${s.note}</p><small>${STOCK_NOTE}</small>`;
+  };
+  pills.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.tk;try{localStorage.setItem('pick',cur)}catch(e){}render()});
+  render();
+
+  const sheet=document.getElementById('sheet'),shT=document.getElementById('sh-t'),shD=document.getElementById('sh-d');
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('.term');
+    if(t){e.preventDefault();const g=GLOSSARY[t.dataset.t];if(!g)return;shT.textContent=g[0];shD.textContent=g[1];sheet.classList.add('on');document.getElementById('sh-x').focus();return}
+    if(sheet.classList.contains('on')&&!e.target.closest('.sheet'))sheet.classList.remove('on');
+  });
+  document.getElementById('sh-x').addEventListener('click',()=>sheet.classList.remove('on'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')sheet.classList.remove('on')});
+}
+</script>
 </body>
 </html>
