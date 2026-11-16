@@ -26,6 +26,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - Gentle, non-shouting colours; distinctive design (not the generic look).
 - No TA-35 tile; no "previous editions" section; Q&A prepared in advance (no live chat box on the site).
 - Ideas offered but not yet done: weekly Friday summary, intraday alerts on big moves, "what changed since yesterday" line, email to friends, TradingView live widget for any ticker.
+- Next steps discussed (16.11.2026): (1) visitor counting with GoatCounter (owner signs up at goatcounter.com, then add its one-line script to index.html); (2) web push notifications for home-screen readers (needs an external push service); (3) later, app-store versions — Google Play via a PWA wrapper (~$25 one-time), Apple App Store needs real native value such as notifications/widget (~$99/year, needs a Mac).
 
 ## Working notes
 - Push with `git -c push.negotiate=true push origin HEAD:main`. Repository settings (rename, Pages) can't be changed through the proxy — the owner does those in GitHub's UI.
