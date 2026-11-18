@@ -19,6 +19,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - Sections (ids): `hero` (headline, subtitle, mood chip, 3 numbered bullets) · `me` (מה זה אומר עליי) · `numbers` (6 tiles with context tags + "עוד נתונים, למתקדמים") · `stocks` (המניות שלי) · `story` · `geo` · `think` (incl. "מה אם כולם טועים?") · `word` (מונח היום) · `faqs` (prepared Q&A accordion) · `tomorrow` · `sources`.
 - Script data filled daily: `STOCKS` (20 tickers: NVDA AAPL MSFT TSLA AMZN GOOGL META AVGO AMD NFLX PLTR JPM V KO TEVA CHKP NICE WIX MBLY ESLT; `price:null` = no data today), `STOCK_NOTE`, `GLOSSARY` (tappable terms `<button class="term" data-t="key">`), `FAQ`.
 - Stock chooser: each reader picks up to 6 tickers, saved in localStorage (`mine`, `pick`).
+- Sharing: Open Graph tags in <head> (og:title = "מצב השוק ואני · <today's headline>", og:description = subtitle, og:image = /og.png) must be updated daily — WhatsApp previews read them (no JS). `apple-touch-icon.png` = home-screen icon. Share buttons (`[data-share]`, in hero and above the footer) use the native share sheet or wa.me and read the headline at runtime.
 - Visitor counter: GoatCounter script before </body> (`https://adamandrachel.goatcounter.com/count`) — must stay on every edition. Dashboard: https://adamandrachel.goatcounter.com
 - Footer must keep: disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + "קרדיט: אדם שימקייביץ" + update time.
 
