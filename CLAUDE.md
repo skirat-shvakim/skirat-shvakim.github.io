@@ -33,6 +33,11 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - Ideas offered but not yet done: weekly Friday summary, intraday alerts on big moves, "what changed since yesterday" line, email to friends, TradingView live widget for any ticker.
 - Next steps discussed (16.11.2026): (1) visitor counting — DONE 18.11 (GoatCounter); (2) web push notifications for home-screen readers (needs an external push service); (3) later, app-store versions — Google Play via a PWA wrapper (~$25 one-time), Apple App Store needs real native value such as notifications/widget (~$99/year, needs a Mac).
 
+## Saved for later (owner said "keep for later", 18.11.2026)
+- Distribution plan: send to 10 friends for honest feedback; open a WhatsApp channel "בורסה בפיג'מה" and paste the daily ready message; daily vertical (1080x1920) card for WhatsApp status / Instagram story with the hook + term of the day (could be a second renderer next to tools/make_og.py).
+- After ~2 weeks: review GoatCounter numbers → decide on push notifications / app.
+- Side-income ideas offered earlier: branded briefing for insurance/pension agents, personalised "מה זה אומר עליי", employer financial-wellness edition, prediction league, audio version, selling the "machine" to other niches.
+
 ## Working notes
 - Push with `git -c push.negotiate=true push origin HEAD:main`. Repository settings (rename, Pages) can't be changed through the proxy — the owner does those in GitHub's UI.
 - Runs on 16–18.11.2026 could not push: "access denied by the git proxy: ... not in this session's authorized repository set (HTTP 403)". A scheduled task only gets the repos authorized in the chat that CREATED it, and a scheduled run cannot add repos itself. Fix: the task was recreated (18.11) from a chat where this repo is attached — confirmed working: the 18.11 manual run pushed successfully. If this repeats, recreate the task from a chat that has the repo attached with push access.
