@@ -149,6 +149,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .faq .lead{color:var(--mute);font-size:15px}
 .faq details{border-top:1px solid var(--line)}
 .faq details:first-child{border-top:0}
+#faqMore details:first-child{border-top:1px solid var(--line)}
 .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:8px 0;font-weight:700;font-size:17px}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--amber);color:var(--sunink);display:grid;place-items:center;font-weight:800;line-height:1}
@@ -167,6 +168,19 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .share::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z'/%3E%3C/svg%3E") center/contain no-repeat}
 .sharefoot{text-align:center;margin-top:26px;padding:22px 16px;border-top:1px solid var(--line)}
 .sharefoot p{margin:0;font-weight:600}
+.meta{margin-bottom:10px}
+.rt{display:inline-block;font-size:13px;font-weight:600;color:var(--mute);background:var(--panel);padding:4px 12px;border-radius:999px}
+[data-fold] .fold-body{display:none}
+[data-fold].open .fold-body{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(-4px)}}
+.more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font:700 15px "Heebo",sans-serif;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--c,var(--blue));background:transparent;color:var(--ink);cursor:pointer}
+.more::after{content:"⌄";font-size:18px;line-height:1;transform:translateY(-3px)}
+[data-fold].open .more::after{content:"⌃";transform:translateY(3px)}
+.teaser{font-weight:500}
+.subh{font:400 20px "Secular One",sans-serif;margin:18px 0 10px;color:var(--red)}
+.geo-in .item:first-child{border-top:0;padding-top:0}
+#story .tag{background:var(--red)}
+@media (prefers-reduced-motion:reduce){[data-fold].open .fold-body{animation:none}}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
 .sheet{position:fixed;inset:auto 0 0 0;z-index:9;display:none;padding:0 12px max(env(safe-area-inset-bottom),12px)}
 .sheet.on{display:block}
@@ -197,6 +211,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 
 <main class="route">
   <section class="card hero" id="hero" data-nav="בשורה התחתונה">
+    <div class="meta"><span class="rt">⏱ 30 שניות לעיקר · 3 דקות להכול</span></div>
     <span class="mood">השוק לא השתכנע</span>
     <h1>אנבידיה הכתה את התחזיות, והמשקיעים בכל זאת מכרו</h1>
     <p class="sub">הפד רומז על העלאות ריבית, הזהב והנפט נופלים, והדולר מגיע לשיא של שנה מול השקל.</p>
@@ -251,24 +266,29 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
     <div class="stock" id="stock" aria-live="polite"></div>
   </section>
 
-  <section class="card" id="story" data-nav="הסיפור של היום">
+  <section class="card" id="story" data-nav="הסיפור של היום" data-fold>
     <h2>הסיפור של היום</h2>
-    <p>אנבידיה פרסמה אתמול בלילה <button class="term" data-t="earnings">דוח רבעוני</button> חזק: ההכנסות הוכפלו לעומת השנה שעברה, וה<button class="term" data-t="guidance">תחזית</button> לרבעון הבא עלתה. המניה קפצה בלילה בכ-4%, אבל היום היא יורדת כ-3%. הסיבות: ירידה צפויה ב<button class="term" data-t="margin">שולי הרווח</button>, חברה בלי מנכ״ל קבוע, ושאלות על המימון של השקעות הבינה המלאכותית.</p>
-    <p>הלחץ השני מגיע מהפד. ב<button class="term" data-t="minutes">פרוטוקול</button> הישיבה האחרונה כמעט כל החברים אמרו שכנראה יידרשו העלאות ריבית, וחלקם רואים בבינה המלאכותית מקור לאינפלציה. ריבית גבוהה בארה״ב מחזקת את הדולר ומפילה את הזהב. מחר מתחילה להיסחר אנתרופיק, ב<button class="term" data-t="ipo">הנפקה</button> שעשויה להיות הגדולה בהיסטוריה.</p>
+    <p class="teaser">אנבידיה הכפילה הכנסות, אבל השוק התמקד בשולי הרווח ובאיתותי הריבית מהפד.</p>
+    <div class="fold-body">
+      <p>אנבידיה פרסמה אתמול בלילה <button class="term" data-t="earnings">דוח רבעוני</button> חזק: ההכנסות הוכפלו לעומת השנה שעברה, וה<button class="term" data-t="guidance">תחזית</button> לרבעון הבא עלתה. המניה קפצה בלילה בכ-4%, אבל היום היא יורדת כ-3%. הסיבות: ירידה צפויה ב<button class="term" data-t="margin">שולי הרווח</button>, חברה בלי מנכ״ל קבוע, ושאלות על המימון של השקעות הבינה המלאכותית.</p>
+      <p>הלחץ השני מגיע מהפד. ב<button class="term" data-t="minutes">פרוטוקול</button> הישיבה האחרונה כמעט כל החברים אמרו שכנראה יידרשו העלאות ריבית, וחלקם רואים בבינה המלאכותית מקור לאינפלציה. ריבית גבוהה בארה״ב מחזקת את הדולר ומפילה את הזהב. מחר מתחילה להיסחר אנתרופיק, ב<button class="term" data-t="ipo">הנפקה</button> שעשויה להיות הגדולה בהיסטוריה.</p>
+      <h3 class="subh">הזווית הגיאופוליטית</h3>
+      <div class="geo-in">
+        <div class="item"><span class="tag">נפט</span><h3>איראן מרחיבה את התקיפות במפרץ</h3><p>היום כוונו רחפנים לבסיס אמריקאי בכווית ולאתרים בבחריין, ומכליות בהורמוז ממשיכות להיפגע. ובכל זאת הנפט ירד, כי היצוא מהמפרץ מתאושש והשוק מעריך שארה״ב תימנע ממלחמה מלאה.</p></div>
+        <div class="item"><span class="tag">סחר</span><h3>טראמפ, שי ופוטין נפגשים מחר בסין</h3><p>על השולחן: נשק גרעיני, איראן ואוקראינה. וושינגטון אומרת שמגבלות הייצוא על שבבים לא עומדות למשא ומתן, וזה מכביד על מניות השבבים.</p></div>
+        <div class="item"><span class="tag">שקל</span><h3>הריבית מזיזה את השקל יותר מהפוליטיקה</h3><p>אייזנקוט ממשיך במגעים להרכבת ממשלה, עד 6.12. אבל היום השקל הושפע בעיקר מהריבית: בארה״ב היא צפויה לעלות, ובישראל אולי לרדת.</p></div>
+      </div>
+    </div>
   </section>
 
-  <section class="card geo" id="geo" data-nav="הזווית הגיאופוליטית">
-    <h2>הזווית הגיאופוליטית</h2>
-    <div class="item"><span class="tag">נפט</span><h3>איראן מרחיבה את התקיפות במפרץ</h3><p>היום כוונו רחפנים לבסיס אמריקאי בכווית ולאתרים בבחריין, ומכליות בהורמוז ממשיכות להיפגע. ובכל זאת הנפט ירד, כי היצוא מהמפרץ מתאושש והשוק מעריך שארה״ב תימנע ממלחמה מלאה.</p></div>
-    <div class="item"><span class="tag">סחר</span><h3>טראמפ, שי ופוטין נפגשים מחר בסין</h3><p>על השולחן: נשק גרעיני, איראן ואוקראינה. וושינגטון אומרת שמגבלות הייצוא על שבבים לא עומדות למשא ומתן, וזה מכביד על מניות השבבים.</p></div>
-    <div class="item"><span class="tag">שקל</span><h3>הריבית מזיזה את השקל יותר מהפוליטיקה</h3><p>אייזנקוט ממשיך במגעים להרכבת ממשלה, עד 6.12. אבל היום השקל הושפע בעיקר מהריבית: בארה״ב היא צפויה לעלות, ובישראל אולי לרדת.</p></div>
-  </section>
 
-  <section class="card think" id="think" data-nav="נקודות למחשבה">
-    <h2>נקודות למחשבה</h2>
-    <div class="item"><h3>מה אם הפד יעלה ריבית בחצי אחוז בדצמבר?</h3><p>הדולר עשוי להמשיך להתחזק, ומניות טכנולוגיה, שרגישות לריבית, עלולות להיפגע עוד.</p></div>
-    <div class="item"><h3>למה אמזון, גוגל וברודקום עלו היום?</h3><p>כולן קשורות לאנתרופיק, כמשקיעות או כשותפות. ההנפקה מחר תראה כמה השוק מעריך את הקשר הזה.</p></div>
-    <div class="item"><h3>מה אם כולם טועים?</h3><p>השוק מתמקד בשולי הרווח ובמנכ״ל. אבל ההכנסות של אנבידיה הוכפלו בשנה, ואנליסטים ב-BofA קראו לדוח ״מרגיע מאוד״. ייתכן שהפסימיות מוגזמת.</p></div>
+  <section class="card think" id="think" data-nav="נקודה למחשבה" data-fold>
+    <h2>נקודה למחשבה</h2>
+    <div class="item teaser"><h3>מה אם הפד יעלה ריבית בחצי אחוז בדצמבר?</h3><p>הדולר עשוי להמשיך להתחזק, ומניות טכנולוגיה, שרגישות לריבית, עלולות להיפגע עוד.</p></div>
+    <div class="fold-body">
+      <div class="item"><h3>למה אמזון, גוגל וברודקום עלו היום?</h3><p>כולן קשורות לאנתרופיק, כמשקיעות או כשותפות. ההנפקה מחר תראה כמה השוק מעריך את הקשר הזה.</p></div>
+      <div class="item"><h3>מה אם כולם טועים?</h3><p>השוק מתמקד בשולי הרווח ובמנכ״ל. אבל ההכנסות של אנבידיה הוכפלו בשנה, ואנליסטים ב-BofA קראו לדוח ״מרגיע מאוד״. ייתכן שהפסימיות מוגזמת.</p></div>
+    </div>
   </section>
 
   <div class="learn">
@@ -280,25 +300,29 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
     </section>
   </div>
 
-  <section class="card faq" id="faqs" data-nav="שאלות ותשובות">
+  <section class="card faq" id="faqs" data-nav="שאלות ותשובות" data-fold>
     <h2>שאלות ותשובות</h2>
-    <p class="lead">שאלות שאולי רצית לשאול על היום. לחץ על שאלה כדי לראות את התשובה.</p>
-    <div id="faq"></div>
+    <div id="faq" class="teaser"></div>
+    <div class="fold-body"><div id="faqMore"></div></div>
   </section>
 
-  <section class="card" id="tomorrow" data-nav="מה לעקוב מחר">
+  <section class="card" id="tomorrow" data-nav="מה לעקוב מחר" data-fold>
     <h2>מה לעקוב מחר</h2>
-    <ul class="cal">
+    <ul class="cal teaser">
       <li><time>בבוקר</time><span>פסגת טראמפ, שי ופוטין בסין: שבבים, איראן ואוקראינה.</span></li>
+    </ul>
+    <div class="fold-body"><ul class="cal">
       <li><time>14:00</time><span>וולמארט מדווחת: מבחן לכוח הקנייה של הצרכן האמריקאי.</span></li>
       <li><time>15:30</time><span>תביעות אבטלה בארה״ב: רמז למצב שוק העבודה ולריבית.</span></li>
       <li><time>16:30</time><span>פתיחת וול סטריט, ואנתרופיק מתחילה להיסחר בסימול ANT.</span></li>
       <li><time>23.11</time><span>החלטת הריבית של בנק ישראל: האם תהיה הורדה.</span></li>
-    </ul>
+    </ul></div>
   </section>
 
-  <section class="card src" id="sources" data-nav="מקורות">
+  <section class="card src" id="sources" data-nav="מקורות" data-fold>
     <h2>מקורות</h2>
+    <p class="teaser">הסקירה מבוססת על 19 כתבות ממקורות בארץ ובעולם.</p>
+    <div class="fold-body">
     <p>
       <a href="https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html">Yahoo Finance – וול סטריט היום</a> ·
       <a href="https://www.stocktitan.net/articles/stock-market-today-live-november-18-2026">StockTitan – אנבידיה וביטוחי הבריאות</a> ·
@@ -320,6 +344,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <a href="https://admiralmarkets.com/analytics/traders-blog/walmart-earnings-preview-q3-fiscal-2027">Admiral Markets – דוח וולמארט</a> ·
       <a href="https://stockanalysis.com/stocks/msft/history/">StockAnalysis – מחירי המניות</a>
     </p>
+    </div>
   </section>
 
 </main>
@@ -376,7 +401,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
     ["למה הדולר ממשיך לעלות?","בארה״ב הריבית (3.75%-4%) גבוהה מבישראל (3.25%), ושם מדברים על העלאה וכאן על הורדה. כסף זורם לריבית הגבוהה יותר, וגופים מוסדיים קונים דולרים."],
     ["מה ההבדל בין מניה לאג״ח?","מניה היא חלק קטן בבעלות על חברה, והיא עולה ויורדת עם הצלחתה. אג״ח היא הלוואה לחברה או למדינה, ומקבלים עליה ריבית שנקבעה מראש."]
   ];
-  document.getElementById('faq').innerHTML=FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');
+  const qa=([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`;document.getElementById('faq').innerHTML=FAQ.slice(0,2).map(qa).join('');document.getElementById('faqMore').innerHTML=FAQ.slice(2).map(qa).join('');
   const STOCK_NOTE="אפל, טסלה וגוגל: במהלך המסחר היום. מיקרוסופט: נעילה היום. אנבידיה, מטא, AMD ופלנטיר: נעילת אתמול (17.11). הקו מראה עד 5 ימי מסחר אחרונים.";
 
   // ===== my stocks (choose up to 6, saved per device) =====
@@ -447,6 +472,25 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
     if(navigator.share){try{await navigator.share({title:"בורסה בפיג'מה",text,url});return}catch(e){if(e&&e.name==='AbortError')return}}
     window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank','noopener');
   }));
+
+  // ===== fold / read more =====
+  const ev=(n)=>{let k=0;const f=()=>{if(window.goatcounter&&window.goatcounter.count){try{window.goatcounter.count({path:'ev-'+n,title:n,event:true})}catch(e){}}else if(k++<10)setTimeout(f,1500)};f()};
+  document.querySelectorAll('[data-fold]').forEach(sec=>{
+    const b=document.createElement('button');b.type='button';b.className='more';b.textContent='קרא עוד';b.setAttribute('aria-expanded','false');
+    sec.querySelector('.fold-body').after(b);
+    b.addEventListener('click',()=>{const on=sec.classList.toggle('open');b.textContent=on?'סגור':'קרא עוד';b.setAttribute('aria-expanded',on);if(on)ev('open-'+sec.id)});
+  });
+  const openFor=id=>{const s=document.getElementById(id);if(s&&s.hasAttribute('data-fold')&&!s.classList.contains('open'))s.querySelector('.more').click()};
+  navList.addEventListener('click',e=>{const a=e.target.closest('a');if(a)openFor(a.getAttribute('href').slice(1))});
+
+  // ===== engagement: time on page (visible only) + scroll depth =====
+  const marks=[15,30,60,120,180,300];let seen=0,mi=0;
+  setInterval(()=>{if(document.visibilityState!=='visible')return;seen++;if(mi<marks.length&&seen>=marks[mi]){ev('time-'+marks[mi]+'s');mi++}},1000);
+  const depths=[25,50,75,100],hit={};
+  const onScroll=()=>{const h=document.documentElement,p=Math.round((h.scrollTop+innerHeight)/h.scrollHeight*100);depths.forEach(d=>{if(p>=d&&!hit[d]){hit[d]=1;ev('scroll-'+d)}})};
+  addEventListener('scroll',onScroll,{passive:true});
+  document.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>ev('share')));
+  document.getElementById('editBtn').addEventListener('click',()=>ev('stock-chooser'));
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
