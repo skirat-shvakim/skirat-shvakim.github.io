@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="apple-mobile-web-app-title" content="מצב השוק ואני">
+<meta name="apple-mobile-web-app-title" content="בורסה בפיג'מה">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>מצב השוק ואני</title>
+<title>בורסה בפיג'מה</title>
 <meta name="description" content="הפד רומז על העלאות ריבית, הזהב והנפט נופלים, והדולר מגיע לשיא של שנה מול השקל.">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="מצב השוק ואני">
+<meta property="og:site_name" content="בורסה בפיג'מה">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://skirat-shvakim.github.io/">
-<meta property="og:title" content="מצב השוק ואני · אנבידיה הכתה את התחזיות, והמשקיעים בכל זאת מכרו">
+<meta property="og:title" content="בורסה בפיג'מה · אנבידיה הכתה את התחזיות, והמשקיעים בכל זאת מכרו">
 <meta property="og:description" content="הפד רומז על העלאות ריבית, הזהב והנפט נופלים, והדולר מגיע לשיא של שנה מול השקל.">
-<meta property="og:image" content="https://skirat-shvakim.github.io/og.png">
+<meta property="og:image" content="https://skirat-shvakim.github.io/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" href="/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Secular+One&display=swap">
 <style>
@@ -181,9 +181,9 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="#hero" aria-label="מצב השוק ואני, לראש העמוד">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30 L14 20 L22 20 L32 10" fill="none" stroke="#0a5cff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="20" r="5" fill="#fff" stroke="#f5a400" stroke-width="3.5"/><circle cx="32" cy="10" r="5" fill="#fff" stroke="#e6402f" stroke-width="3.5"/></svg>
-      <span class="bt"><span class="b1">מצב השוק</span> <span class="b2">ואני</span></span>
+    <a class="brand" href="#hero" aria-label="בורסה בפיג'מה, לראש העמוד">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#131d3b"/><circle cx="26.5" cy="11.5" r="6" fill="#ffd76a"/><circle cx="29.3" cy="9.6" r="5.3" fill="#131d3b"/><path d="M6 31 L13.5 24 L20 26 L32.5 17.5" fill="none" stroke="#4d86ff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="24" r="3" fill="#131d3b" stroke="#f5b400" stroke-width="2.3"/><circle cx="32.5" cy="17.5" r="3" fill="#131d3b" stroke="#ff6a55" stroke-width="2.3"/><circle cx="9" cy="9" r=".8" fill="#fff"/><circle cx="16" cy="6.5" r=".6" fill="#fff"/></svg>
+      <span class="bt"><span class="b1">בורסה</span> <span class="b2">בפיג'מה</span></span>
     </a>
     <span class="date">יום רביעי · 18.11</span>
     <button type="button" class="menu" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="תפריט"><span></span><span></span><span></span></button>
@@ -443,8 +443,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   // ===== share =====
   document.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',async()=>{
     const h=document.querySelector('#hero h1').textContent.trim(),url='https://skirat-shvakim.github.io/';
-    const text=`מצב השוק ואני · ${h}\nסקירת ערב קצרה למתחילים:`;
-    if(navigator.share){try{await navigator.share({title:'מצב השוק ואני',text,url});return}catch(e){if(e&&e.name==='AbortError')return}}
+    const text=`בורסה בפיג'מה 🌙 · ${h}\nסקירת ערב קצרה למתחילים:`;
+    if(navigator.share){try{await navigator.share({title:"בורסה בפיג'מה",text,url});return}catch(e){if(e&&e.name==='AbortError')return}}
     window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank','noopener');
   }));
 }

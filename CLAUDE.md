@@ -1,4 +1,4 @@
-# מצב השוק ואני — project notes for Claude
+# בורסה בפיג'מה (formerly "מצב השוק ואני") — project notes for Claude
 
 Read this first when continuing work on this project. Reply to the owner in Hebrew (masculine address), in plain non-technical language.
 
@@ -7,7 +7,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 **https://skirat-shvakim.github.io** (GitHub Pages, branch `main`, repo root). The owner and his friends add it to their iPhone home screens.
 
 ## How it runs
-- A scheduled task in the owner's Claude account, **"מצב השוק ואני – סקירה יומית"** (trigger id `trig_01PjbmXSTaAUDXMwRDEjRQjE`, created 18.11.2026 from the chat that has this repo authorized; the older task `trig_01YPxYuGW5B737yY1GbFVKyh` is disabled), runs Sun–Thu (cron `CRON_TZ=Asia/Jerusalem 14 18 * * 1-5`, i.e. Mon–Fri UTC-calendar days = Israeli trading days) at 18:14 Israel time.
+- A scheduled task in the owner's Claude account, **"בורסה בפיג'מה – סקירה יומית"** (trigger id `trig_01PjbmXSTaAUDXMwRDEjRQjE`, created 18.11.2026 from the chat that has this repo authorized; the older task `trig_01YPxYuGW5B737yY1GbFVKyh` is disabled), runs Sun–Thu (cron `CRON_TZ=Asia/Jerusalem 14 18 * * 1-5`, i.e. Mon–Fri UTC-calendar days = Israeli trading days) at 18:14 Israel time.
 - Each run: researches the web → writes the briefing → takes the current `index.html` in this repo as the template → replaces content + script data → `node --check` → commits and pushes to `main` → sends the owner a push notification.
 - If pushing fails, it publishes the page as a Claude artifact instead and reports the exact error.
 - A watchdog task (email if the site was not updated) was created and then cancelled at the owner's request (18.11.2026): Claude notifications can only email the account address. The owner checks the "עודכן" date in the footer and the daily push notification instead.
@@ -15,11 +15,12 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 
 ## Page structure (`index.html`, single self-contained file)
 - Design: "metro line" — a thick coloured route down the side; each section is a station (`.route [data-nav]::before/::after`). Fonts: Secular One (headings) + Heebo. White ground; line colours blue/amber/red/green/teal. Dark mode via `light-dark()`.
-- Sticky header: logo + "מצב השוק ואני" + date + menu button. Side menu (drawer on phone, fixed sidebar ≥1180px) is generated from every element with `data-nav` (keep ids/data-nav when editing).
+- Brand renamed 18.11.2026 to "בורסה בפיג'מה" (logo: night-blue square, crescent moon + metro line). og.png = night-sky share card; bump ?v=N on og.png/icon URLs when they change (WhatsApp caches).
+- Sticky header: logo + "בורסה בפיג'מה" + date + menu button. Side menu (drawer on phone, fixed sidebar ≥1180px) is generated from every element with `data-nav` (keep ids/data-nav when editing).
 - Sections (ids): `hero` (headline, subtitle, mood chip, 3 numbered bullets) · `me` (מה זה אומר עליי) · `numbers` (6 tiles with context tags + "עוד נתונים, למתקדמים") · `stocks` (המניות שלי) · `story` · `geo` · `think` (incl. "מה אם כולם טועים?") · `word` (מונח היום) · `faqs` (prepared Q&A accordion) · `tomorrow` · `sources`.
 - Script data filled daily: `STOCKS` (20 tickers: NVDA AAPL MSFT TSLA AMZN GOOGL META AVGO AMD NFLX PLTR JPM V KO TEVA CHKP NICE WIX MBLY ESLT; `price:null` = no data today), `STOCK_NOTE`, `GLOSSARY` (tappable terms `<button class="term" data-t="key">`), `FAQ`.
 - Stock chooser: each reader picks up to 6 tickers, saved in localStorage (`mine`, `pick`).
-- Sharing: Open Graph tags in <head> (og:title = "מצב השוק ואני · <today's headline>", og:description = subtitle, og:image = /og.png) must be updated daily — WhatsApp previews read them (no JS). `apple-touch-icon.png` = home-screen icon. Share buttons (`[data-share]`, in hero and above the footer) use the native share sheet or wa.me and read the headline at runtime.
+- Sharing: Open Graph tags in <head> (og:title = "בורסה בפיג'מה · <today's headline>", og:description = subtitle, og:image = /og.png) must be updated daily — WhatsApp previews read them (no JS). `apple-touch-icon.png` = home-screen icon. Share buttons (`[data-share]`, in hero and above the footer) use the native share sheet or wa.me and read the headline at runtime.
 - Visitor counter: GoatCounter script before </body> (`https://adamandrachel.goatcounter.com/count`) — must stay on every edition. Dashboard: https://adamandrachel.goatcounter.com
 - Footer must keep: disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + "קרדיט: אדם שימקייביץ" + update time.
 
