@@ -11,9 +11,9 @@
 <meta property="og:site_name" content="בורסה בפיג'מה">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://skirat-shvakim.github.io/">
-<meta property="og:title" content="בורסה בפיג'מה · אנבידיה הכתה את התחזיות, והמשקיעים בכל זאת מכרו">
+<meta property="og:title" content="אנבידיה ניפצה את התחזיות. אז למה כולם מכרו?">
 <meta property="og:description" content="הפד רומז על העלאות ריבית, הזהב והנפט נופלים, והדולר מגיע לשיא של שנה מול השקל.">
-<meta property="og:image" content="https://skirat-shvakim.github.io/og.png?v=2">
+<meta property="og:image" content="https://skirat-shvakim.github.io/og.png?v=1811">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -442,8 +442,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 
   // ===== share =====
   document.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',async()=>{
-    const h=document.querySelector('#hero h1').textContent.trim(),url='https://skirat-shvakim.github.io/';
-    const text=`בורסה בפיג'מה 🌙 · ${h}\nסקירת ערב קצרה למתחילים:`;
+    const h=(document.querySelector('meta[property="og:title"]')||{}).content||document.querySelector('#hero h1').textContent.trim(),d=new Date(),url='https://skirat-shvakim.github.io/?d='+String(d.getDate()).padStart(2,'0')+String(d.getMonth()+1).padStart(2,'0');
+    const text=`${h}\n🌙 בורסה בפיג'מה`;
     if(navigator.share){try{await navigator.share({title:"בורסה בפיג'מה",text,url});return}catch(e){if(e&&e.name==='AbortError')return}}
     window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank','noopener');
   }));
