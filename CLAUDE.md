@@ -6,6 +6,9 @@ Read this first when continuing work on this project. Reply to the owner in Hebr
 A daily evening market briefing in Hebrew for beginners, published as a static website:
 **https://skirat-shvakim.github.io** (GitHub Pages, branch `main`, repo root). The owner and his friends add it to their iPhone home screens.
 
+## Project board (for the owner)
+- Private Claude artifact "בורסה בפיג'מה – לוח הפרויקט" (slug `a1fe337c-8b16-4c87-a569-57d01573c29b`): how the system works (metro-line route), all platforms with links, timeline of events, how to change things, plans. Source copy: /home/claude/hub/index.html in the project chat. UPDATE IT (timeline + 'עודכן לאחרונה') whenever something meaningful changes in the project.
+
 ## How it runs
 - A scheduled task in the owner's Claude account, **"בורסה בפיג'מה – סקירה יומית"** (trigger id `trig_01PjbmXSTaAUDXMwRDEjRQjE`, created 18.11.2026 from the chat that has this repo authorized; the older task `trig_01YPxYuGW5B737yY1GbFVKyh` is disabled), runs Sun–Thu (cron `CRON_TZ=Asia/Jerusalem 14 18 * * 1-5`, i.e. Mon–Fri UTC-calendar days = Israeli trading days) at 18:14 Israel time.
 - Each run: researches the web → writes the briefing → takes the current `index.html` in this repo as the template → replaces content + script data → `node --check` → commits and pushes to `main` → sends the owner a push notification.
