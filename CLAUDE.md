@@ -10,7 +10,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - A scheduled task in the owner's Claude account, **"מצב השוק ואני – סקירה יומית"** (trigger id `trig_01PjbmXSTaAUDXMwRDEjRQjE`, created 18.11.2026 from the chat that has this repo authorized; the older task `trig_01YPxYuGW5B737yY1GbFVKyh` is disabled), runs Sun–Thu (cron `CRON_TZ=Asia/Jerusalem 14 18 * * 1-5`, i.e. Mon–Fri UTC-calendar days = Israeli trading days) at 18:14 Israel time.
 - Each run: researches the web → writes the briefing → takes the current `index.html` in this repo as the template → replaces content + script data → `node --check` → commits and pushes to `main` → sends the owner a push notification.
 - If pushing fails, it publishes the page as a Claude artifact instead and reports the exact error.
-- Watchdog: scheduled task "שומר ראש – בדיקת עדכון האתר" (`trig_0152GeAzC7hQ5VGbx85taxVM`), Mon–Fri 19:21 Israel time, checks for today's "סקירת שווקים" commit / footer date and emails the owner only if the site was not updated.
+- A watchdog task (email if the site was not updated) was created and then cancelled at the owner's request (18.11.2026): Claude notifications can only email the account address. The owner checks the "עודכן" date in the footer and the daily push notification instead.
 - To change what the agent does, edit the scheduled task's prompt (`update_trigger`). To change the design, edit `index.html` here — the agent copies whatever design is live.
 
 ## Page structure (`index.html`, single self-contained file)
