@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>התחל כאן · בורסה בפיג'מה</title>
+<meta name="description" content="5 מושגים בסיסיים בשוק ההון, ב-2 דקות ובשפה פשוטה.">
+<meta property="og:title" content="התחל כאן · בורסה בפיג'מה">
+<meta property="og:description" content="5 מושגים בסיסיים בשוק ההון, ב-2 דקות ובשפה פשוטה.">
+<meta property="og:image" content="https://skirat-shvakim.github.io/og.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" href="/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Secular+One&display=swap">
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0e1116);--panel:light-dark(#f4f6f9,#171c23);--card:light-dark(#ffffff,#1b2129);--ink:light-dark(#141a22,#eef1f5);--mute:light-dark(#556070,#98a2b3);--line:light-dark(#e6e9ef,#2a313b);--blue:light-dark(#0a5cff,#5b8cff);--amber:light-dark(#f5a400,#ffc23d);--red:light-dark(#c4321f,#ff7a6b);--green:light-dark(#00794a,#3ad08a);--tealc:light-dark(#007585,#3cc6d6);--mint:light-dark(#eaf1ff,#1a2436)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Heebo",system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 48px;zoom:var(--z,1)}
+h1,h2,.bt{font-family:"Secular One","Heebo",sans-serif;font-weight:400}
+.skip{position:absolute;inset-inline-start:8px;top:-60px;z-index:50;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}.skip:focus{top:8px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;margin:0 -16px 18px;padding:max(env(safe-area-inset-top),10px) 16px 10px;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-inline-end:auto}
+.brand svg{width:36px;height:36px;flex:none}.bt{font-size:22px;line-height:1}.b2{color:var(--blue)}
+.back{font-weight:700;color:var(--blue);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+h1{font-size:clamp(32px,7vw,44px);line-height:1.1;margin:10px 0 8px;text-wrap:balance}
+.lead{color:var(--mute);font-size:18px;margin:0 0 22px}
+h2{font-size:24px;line-height:1.2;margin:0 0 8px}
+.card{background:var(--panel);border-radius:20px;padding:20px;margin-bottom:14px;border-inline-start:8px solid var(--c,var(--blue))}
+.card p{margin:0 0 10px}.card p:last-child{margin:0}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
+.lbl{font-weight:700}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.foot{text-align:center;color:var(--mute);font-size:14px;margin-top:26px;line-height:1.7}
+.foot a{color:inherit}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן</a>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="./" aria-label="בורסה בפיג'מה, לסקירה של היום"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#131d3b"/><circle cx="26.5" cy="11.5" r="6" fill="#ffd76a"/><circle cx="29.3" cy="9.6" r="5.3" fill="#131d3b"/><path d="M6 31 L13.5 24 L20 26 L32.5 17.5" fill="none" stroke="#4d86ff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="24" r="3" fill="#131d3b" stroke="#f5b400" stroke-width="2.3"/><circle cx="32.5" cy="17.5" r="3" fill="#131d3b" stroke="#ff6a55" stroke-width="2.3"/></svg><span class="bt"><span class="b1">בורסה</span> <span class="b2">בפיג'מה</span></span></a>
+  <a class="back" href="./">לסקירה של היום ›</a>
+</header>
+<main id="main">
+<h1>התחל כאן: 5 מושגים ב-2 דקות</h1>
+<p class="lead">עם חמשת המושגים האלה תבין כמעט כל סקירה. אין צורך בידע קודם.</p>
+
+<section class="card" style="--c:var(--blue)" aria-labelledby="t1">
+  <h2 id="t1">מניה</h2>
+  <p>חלק קטן מחברה. מי שקונה מניה של חברה הופך לשותף קטן בה.</p>
+  <p><span class="lbl">למה זה חשוב לך:</span> כשהחברה מצליחה, המניה בדרך כלל עולה. כשהיא נכשלת, המניה יורדת.</p>
+  <p class="ex">דוגמה: מניה אחת של אפל היא חלק זעיר מאפל. אם אפל מרוויחה יותר, גם המניה שווה בדרך כלל יותר.</p>
+</section>
+
+<section class="card" style="--c:var(--amber)" aria-labelledby="t2">
+  <h2 id="t2">מדד</h2>
+  <p>סל של הרבה מניות יחד. המדד מראה איך השוק כולו התנהג, ולא רק חברה אחת.</p>
+  <p><span class="lbl">למה זה חשוב לך:</span> חלק גדול מהפנסיה וקרן ההשתלמות שלך מושקע במדדים.</p>
+  <p class="ex">דוגמה: ת״א 125 כולל 125 חברות גדולות בבורסה בתל אביב. S&amp;P 500 כולל 500 חברות גדולות בארה״ב.</p>
+</section>
+
+<section class="card" style="--c:var(--red)" aria-labelledby="t3">
+  <h2 id="t3">ריבית</h2>
+  <p>המחיר של כסף. מי שלווה משלם ריבית. מי שחוסך מקבל ריבית.</p>
+  <p><span class="lbl">למה זה חשוב לך:</span> בנק ישראל קובע את הריבית. כשהיא עולה, המשכנתא וההלוואות מתייקרות.</p>
+  <p class="ex">דוגמה: אם הריבית יורדת, ההחזר החודשי במסלול פריים במשכנתא יורד מעט.</p>
+</section>
+
+<section class="card" style="--c:var(--green)" aria-labelledby="t4">
+  <h2 id="t4">דולר (שער החליפין)</h2>
+  <p>כמה שקלים צריך לשלם כדי לקנות דולר אחד. המספר הזה משתנה כל יום.</p>
+  <p><span class="lbl">למה זה חשוב לך:</span> דולר יקר מייקר חופשות בחו״ל ומוצרים מיובאים. דולר זול מוזיל אותם.</p>
+  <p class="ex">דוגמה: אם הדולר עולה מ-3.20 ל-3.30 שקלים, טיסה של 1,000 דולר מתייקרת בכ-100 שקלים.</p>
+</section>
+
+<section class="card" style="--c:var(--tealc)" aria-labelledby="t5">
+  <h2 id="t5">קרן מחקה</h2>
+  <p>קרן שקונה את כל המניות שבמדד, באותם משקלים. כך, בקנייה אחת, משקיעים בהרבה חברות.</p>
+  <p><span class="lbl">למה זה חשוב לך:</span> זו דרך נפוצה ופשוטה להשקיע. דמי הניהול בה בדרך כלל נמוכים.</p>
+  <p class="ex">דוגמה: קרן מחקה על S&amp;P 500 עולה ויורדת כמעט בדיוק כמו המדד עצמו.</p>
+</section>
+
+<section class="card" style="--c:var(--ink)" aria-labelledby="t6">
+  <h2 id="t6">איך לקרוא את הסקירה</h2>
+  <p>1. <span class="lbl">30 שניות:</span> הכותרת, שלוש השורות ו"מה זה אומר עליי". זה העיקר.</p>
+  <p>2. <span class="lbl">מילה לא מוכרת?</span> מילה עם קו תחתון מנוקד היא לחיצה. לחיצה עליה מסבירה אותה.</p>
+  <p>3. <span class="lbl">רוצה עוד?</span> "קרא עוד" פותח את ההסבר המלא.</p>
+  <p><a href="./">לסקירה של היום ›</a></p>
+</section>
+</main>
+<p class="foot"><a href="./">הסקירה של היום</a> · <a href="start.html">התחל כאן</a> · <a href="glossary.html">מילון</a> · <a href="accessibility.html">הצהרת נגישות</a><br>המידע באתר הוא מידע כללי ולימודי בלבד ואינו מהווה ייעוץ השקעות.</p>
+</div>
+<script>{let z=1;try{z=[1,1.15,1.3][+localStorage.getItem('tsz')||0]||1}catch(e){}document.documentElement.style.setProperty('--z',z)}</script>
+<script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

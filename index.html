@@ -29,10 +29,10 @@
    LAYOUT: one column riding along the line; sticky header; menu drawer = the line's station list */
 :root{color-scheme:light dark;
 --bg:light-dark(#ffffff,#0e1116);--panel:light-dark(#f4f6f9,#171c23);--card:light-dark(#ffffff,#1b2129);--ink:light-dark(#141a22,#eef1f5);
---mute:light-dark(#667085,#98a2b3);--line:light-dark(#e6e9ef,#2a313b);
---blue:light-dark(#0a5cff,#5b8cff);--amber:light-dark(#f5a400,#ffc23d);--red:light-dark(#e6402f,#ff7a6b);--green:light-dark(#00a05a,#3ad08a);--tealc:light-dark(#0096a8,#3cc6d6);--grey:light-dark(#98a2b3,#5b6574);
+--mute:light-dark(#556070,#98a2b3);--line:light-dark(#e6e9ef,#2a313b);
+--blue:light-dark(#0a5cff,#5b8cff);--amber:light-dark(#f5a400,#ffc23d);--red:light-dark(#c4321f,#ff7a6b);--green:light-dark(#00794a,#3ad08a);--tealc:light-dark(#007585,#3cc6d6);--grey:light-dark(#98a2b3,#5b6574);
 --teal:var(--blue);--sky:var(--blue);--coral:var(--red);--mint:light-dark(#eaf1ff,#1a2436);--skysoft:light-dark(#eaf1ff,#1a2436);--sun:light-dark(#fff6df,#2e2814);--sunink:light-dark(#8a5a00,#ffd36e);
---up:light-dark(#00874c,#3ad08a);--upbg:light-dark(#e3f6ec,#123222);--down:light-dark(#d23c2c,#ff7a6b);--downbg:light-dark(#fdeceb,#3a1c1c)}
+--up:light-dark(#006b3c,#3ad08a);--upbg:light-dark(#e3f6ec,#123222);--down:light-dark(#b3261e,#ff7a6b);--downbg:light-dark(#fdeceb,#3a1c1c)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
@@ -181,6 +181,27 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .geo-in .item:first-child{border-top:0;padding-top:0}
 #story .tag{background:var(--red)}
 @media (prefers-reduced-motion:reduce){[data-fold].open .fold-body{animation:none}}
+/* accessibility */
+.wrap{zoom:var(--z,1)}
+.skip{position:absolute;inset-inline-start:8px;top:-60px;z-index:50;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+.skip:focus{top:8px}
+.tsz{display:flex;gap:4px;flex:none}
+.tsz button{width:40px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:800 15px "Heebo",sans-serif;cursor:pointer}
+.tsz button[disabled]{opacity:.35;cursor:default}
+.listen{display:inline-flex;align-items:center;gap:8px;margin:14px 0 0 8px;font:700 16px "Heebo",sans-serif;min-height:46px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer}
+.listen svg{width:18px;height:18px}
+.listen[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.newbie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px;padding:12px 14px;border-radius:14px;background:var(--mint);font-weight:600}
+.newbie a{color:var(--blue)}
+.newbie button{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
+.nav .extra{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.nav .extra::before{display:none}
+.nav .extra a::before{border-radius:3px;border-color:var(--line)}
+.chg .w{font-weight:700}
+.t .chg span,.chg span{display:inline}
+.chg{direction:rtl;unicode-bidi:isolate}
+.foot a{color:inherit}
+@media (max-width:420px){.tsz button{width:34px}.date{display:none}}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
 .sheet{position:fixed;inset:auto 0 0 0;z-index:9;display:none;padding:0 12px max(env(safe-area-inset-bottom),12px)}
 .sheet.on{display:block}
@@ -194,23 +215,27 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 </head>
 <body>
 <div class="wrap">
+  <a class="skip" href="#hero">דלג לתוכן</a>
   <header class="top">
     <a class="brand" href="#hero" aria-label="בורסה בפיג'מה, לראש העמוד">
       <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#131d3b"/><circle cx="26.5" cy="11.5" r="6" fill="#ffd76a"/><circle cx="29.3" cy="9.6" r="5.3" fill="#131d3b"/><path d="M6 31 L13.5 24 L20 26 L32.5 17.5" fill="none" stroke="#4d86ff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="24" r="3" fill="#131d3b" stroke="#f5b400" stroke-width="2.3"/><circle cx="32.5" cy="17.5" r="3" fill="#131d3b" stroke="#ff6a55" stroke-width="2.3"/><circle cx="9" cy="9" r=".8" fill="#fff"/><circle cx="16" cy="6.5" r=".6" fill="#fff"/></svg>
       <span class="bt"><span class="b1">בורסה</span> <span class="b2">בפיג'מה</span></span>
     </a>
     <span class="date">סיכום שבוע 16–20.11</span>
+    <div class="tsz" role="group" aria-label="גודל טקסט"><button type="button" id="tszDown" aria-label="הקטנת טקסט">א−</button><button type="button" id="tszUp" aria-label="הגדלת טקסט">א+</button></div>
     <button type="button" class="menu" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="תפריט"><span></span><span></span><span></span></button>
   </header>
 
   <nav class="nav" id="nav" aria-label="ניווט בסקירה">
     <div class="navhead"><b>בסקירה של היום</b><button type="button" id="navX" aria-label="סגירת התפריט">✕</button></div>
     <ul id="navList"></ul>
+    <ul class="extra"><li><a href="start.html">התחל כאן: 5 מושגים בסיסיים</a></li><li><a href="glossary.html">המילון: כל המונחים</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li></ul>
   </nav>
   <div class="scrim" id="scrim"></div>
 
 <main class="route">
   <section class="card hero" id="hero" data-nav="בשורה התחתונה">
+    <div class="newbie" id="newbie" hidden><span>חדש בשוק ההון? <a href="start.html">התחל כאן: 5 מושגים ב-2 דקות</a></span><button type="button" id="newbieX" aria-label="סגירה">✕</button></div>
     <div class="meta"><span class="rt">⏱ 30 שניות לעיקר · 3 דקות להכול</span></div>
     <span class="mood">סיכום השבוע · שבוע אדום</span>
     <h1>שבוע אדום: נאסד״ק צנח 10%, הדולר זינק ל-3.33</h1>
@@ -220,6 +245,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <li><button class="term" data-t="ta125">ת״א 125</button> ירד 4.3%. הדולר עלה 3.6%, לשיא של 19 חודשים.</li>
       <li>אנבידיה איבדה כ-23% למרות דוח מצוין. אנתרופיק עדיין מעל מחיר ה<button class="term" data-t="ipo">הנפקה</button>.</li>
     </ul>
+    <button type="button" class="listen" id="listen" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>הקשב לעיקר</span></button>
     <button type="button" class="share" data-share>שתפו את הסקירה בוואטסאפ</button>
   </section>
 
@@ -352,7 +378,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 </main>
 
   <div class="sharefoot"><p>אהבת? שלח לחבר שמתחיל להתעניין בשוק</p><button type="button" class="share" data-share>שיתוף</button></div>
-  <p class="foot">הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>קרדיט: אדם שימקייביץ<br>עודכן: 21.11.2026 23:35</p>
+  <p class="foot"><a href="accessibility.html">הצהרת נגישות</a> · <a href="glossary.html">מילון</a> · <a href="start.html">התחל כאן</a><br>הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>קרדיט: אדם שימקייביץ<br>עודכן: 21.11.2026 23:35</p>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sh-t">
@@ -419,7 +445,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   const save=()=>{try{localStorage.setItem('mine',JSON.stringify(mine));localStorage.setItem('pick',cur)}catch(e){}};
   const spark=(w,up)=>{if(!w||w.length<2)return'';const mn=Math.min(...w),mx=Math.max(...w),r=mx-mn||1;
     const pts=w.map((v,i)=>`${(i/(w.length-1)*100).toFixed(1)},${(48-(v-mn)/r*40).toFixed(1)}`).join(' ');
-    return `<svg class="spark" viewBox="0 0 100 52" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="var(${up?'--up':'--down'})" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`};
+    return `<svg class="spark" viewBox="0 0 100 52" preserveAspectRatio="none" role="img" aria-label="${up?'מגמת עלייה':'מגמת ירידה'} ב-5 ימי המסחר האחרונים"><polyline points="${pts}" fill="none" stroke="var(${up?'--up':'--down'})" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`};
   const render=()=>{
     if(!mine.includes(cur))cur=mine[0];
     pills.innerHTML=mine.map(t=>`<button type="button" data-tk="${t}" aria-pressed="${t===cur}">${t}</button>`).join('');
@@ -428,7 +454,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
     if(s.price==null){box.innerHTML=`<div><div class="nm">${s.name} · ${s.tk}</div><div class="px">—</div></div><p>הנתונים למניה הזו יופיעו החל מהסקירה הבאה.</p>`;return}
     const up=s.chg>=0;
     box.innerHTML=`<div><div class="nm">${s.name} · ${s.tk}</div><div class="px">${s.price}</div></div>
-      <span class="chg ${up?'u':'d'}">${up?'▲':'▼'} ${Math.abs(s.chg).toFixed(1)}%</span>
+      <span class="chg ${up?'u':'d'}"><span aria-hidden="true">${up?'▲':'▼'}</span> <span class="w">${up?'עלייה':'ירידה'}</span> ${Math.abs(s.chg).toFixed(1)}%</span>
       ${spark(s.week,s.week&&s.week[s.week.length-1]>=s.week[0])}<p>${s.note}</p><small>${STOCK_NOTE}</small>`;
   };
   const renderOpts=()=>{
@@ -495,6 +521,24 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   addEventListener('scroll',onScroll,{passive:true});
   document.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>ev('share')));
   document.getElementById('editBtn').addEventListener('click',()=>ev('stock-chooser'));
+
+  // ===== accessibility: text size, up/down words, listen, newbie =====
+  const Z=[1,1.15,1.3];let zi=0;try{zi=Math.max(0,Math.min(2,+localStorage.getItem('tsz')||0))}catch(e){}
+  const dn=document.getElementById('tszDown'),upb=document.getElementById('tszUp');
+  const applyZ=()=>{document.documentElement.style.setProperty('--z',Z[zi]);dn.disabled=zi===0;upb.disabled=zi===Z.length-1;try{localStorage.setItem('tsz',zi)}catch(e){}};
+  dn.addEventListener('click',()=>{if(zi>0){zi--;applyZ()}});upb.addEventListener('click',()=>{if(zi<Z.length-1){zi++;applyZ();ev('text-bigger')}});applyZ();
+  document.querySelectorAll('.t .chg').forEach(c=>{if(c.querySelector('.w'))return;const t=c.textContent.trim(),up=c.classList.contains('u');const m=t.replace(/^[▲▼]\s*/,'');c.innerHTML=`<span aria-hidden="true">${up?'▲':'▼'}</span> <span class="w">${up?'עלייה':'ירידה'}</span> ${m}`});
+  const lb=document.getElementById('listen');
+  if('speechSynthesis' in window&&lb){
+    lb.hidden=false;
+    const say=()=>{const q=s=>[...document.querySelectorAll(s)].map(e=>e.textContent.trim()).join('. ');return [q('#hero h1'),q('#hero .sub'),q('#hero .bottom li'),'מה זה אומר עליי: '+q('#me li')].join('. ')};
+    lb.addEventListener('click',()=>{const ss=window.speechSynthesis;if(ss.speaking){ss.cancel();lb.setAttribute('aria-pressed','false');return}
+      const u=new SpeechSynthesisUtterance(say());u.lang='he-IL';u.rate=1;const v=ss.getVoices().find(v=>/^he|iw/i.test(v.lang));if(v)u.voice=v;
+      u.onend=u.onerror=()=>lb.setAttribute('aria-pressed','false');lb.setAttribute('aria-pressed','true');ss.speak(u);ev('listen')});
+  }
+  const nb=document.getElementById('newbie');let seenB=null;try{seenB=localStorage.getItem('seen')}catch(e){}
+  if(nb&&!seenB){nb.hidden=false;document.getElementById('newbieX').addEventListener('click',()=>{nb.hidden=true;try{localStorage.setItem('seen','1')}catch(e){}})}
+  if(nb)nb.querySelector('a').addEventListener('click',()=>{try{localStorage.setItem('seen','1')}catch(e){}});
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
