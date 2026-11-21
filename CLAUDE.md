@@ -18,6 +18,17 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - A watchdog task (email if the site was not updated) was created and then cancelled at the owner's request (18.11.2026): Claude notifications can only email the account address. The owner checks the "עודכן" date in the footer and the daily push notification instead.
 - To change what the agent does, edit the scheduled task's prompt (`update_trigger`). To change the design, edit `index.html` here — the agent copies whatever design is live.
 
+## MANDATORY for every daily and weekly run (added 22.11.2026 — these override anything looser in the task prompt)
+### Writing for everyone in Israel
+- Grade-9 Hebrew: sentences of at most 12 words, simple verbs, no abbreviations/acronyms, no professional slang.
+- One hard term per sentence at most; every professional term is a tappable glossary `<button class="term">` with a plain definition.
+- Every important number gets everyday context. Pattern: "הדולר עלה ב-2%" + "בפועל: טיסה של 1,000 דולר התייקרה בכ-70 ש״ח". Compute it correctly from the real numbers.
+- Data time next to numbers: each tile ends with `<span class="asof">נכון ל-HH:MM</span>` (Israel time of the figure; for closes write "נעילה" / "נעילת שישי"), and the stock note says when prices are from.
+### Accessibility features already on the page — keep them exactly
+- Skip link, text-size buttons (#tszDown/#tszUp, CSS var --z on .wrap), AA-contrast colour values in :root, up/down words (JS adds "עלייה/ירידה" next to the arrow; keep the "▲ 0.6%" / "▼ 0.6%" format in .chg), sparkline aria-label, "הקשב לעיקר" button (#listen, Web Speech), newcomer banner (#newbie → start.html), nav extra links (start.html, glossary.html, accessibility.html), footer links. Do not change colours, fonts, sizes or layout — visual consistency every day.
+### Glossary file
+- Before committing, merge today's GLOSSARY into `glossary.json` (array of {term, def}): add every term not already there (match by term), keep existing entries, sort by term (Hebrew locale), and `git add glossary.json` in the same commit. glossary.html reads it.
+
 ## Page structure (`index.html`, single self-contained file)
 - Design: "metro line" — a thick coloured route down the side; each section is a station (`.route [data-nav]::before/::after`). Fonts: Secular One (headings) + Heebo. White ground; line colours blue/amber/red/green/teal. Dark mode via `light-dark()`.
 - Brand renamed 18.11.2026 to "בורסה בפיג'מה" (logo: night-blue square, crescent moon + metro line). og.png = night-sky share card; bump ?v=N on og.png/icon URLs when they change (WhatsApp caches).
@@ -30,7 +41,8 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - Daily HOOK: one punchy line (≤ 9 words, usually a question, e.g. "מה קרה בדוח של אנבידיה?", "למה הדולר זינק היום?") — the most attention-grabbing true fact of the day. It is og:title, the text on the share card, and the first line of the WhatsApp message. Card: `python3 tools/make_og.py "<hook>"` renders og.png (brand BIG on top, hook smaller underneath a thin amber rule; no extra sentences); og:image URL gets ?v=<DDMM>.
 - Sharing: Open Graph tags in <head> (og:title = the hook, og:description = subtitle, og:image = /og.png?v=<DDMM>) must be updated daily — WhatsApp previews read them (no JS). `apple-touch-icon.png` = home-screen icon. Share buttons (`[data-share]`, in hero and above the footer) use the native share sheet or wa.me and read the headline at runtime.
 - Visitor counter: GoatCounter script before </body> (`https://adamandrachel.goatcounter.com/count`) — must stay on every edition. Dashboard: https://adamandrachel.goatcounter.com
-- Footer must keep: disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + "קרדיט: אדם שימקייביץ" + update time.
+- Extra pages: start.html (5 basics), glossary.html (reads glossary.json), accessibility.html (statement — contact details still to be added by the owner). Shared look, no daily changes needed.
+- Footer must keep: links (הצהרת נגישות · מילון · התחל כאן) + disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + "קרדיט: אדם שימקייביץ" + update time.
 
 ## Owner's preferences so far
 - Concise writing (hard length limits are in the task prompt) — people read fast.
