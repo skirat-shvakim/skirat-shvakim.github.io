@@ -42,7 +42,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - Sharing: Open Graph tags in <head> (og:title = the hook, og:description = subtitle, og:image = /og.png?v=<DDMM>) must be updated daily — WhatsApp previews read them (no JS). `apple-touch-icon.png` = home-screen icon. Share buttons (`[data-share]`, in hero and above the footer) use the native share sheet or wa.me and read the headline at runtime.
 - Visitor counter: GoatCounter script before </body> (`https://adamandrachel.goatcounter.com/count`) — must stay on every edition. Dashboard: https://adamandrachel.goatcounter.com
 - Extra pages: start.html (5 basics), glossary.html (reads glossary.json), accessibility.html (statement — contact details still to be added by the owner). Shared look, no daily changes needed.
-- Footer must keep: links (הצהרת נגישות · מילון · התחל כאן) + disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + "קרדיט: אדם שימקייביץ" + update time.
+- Footer must keep: links (הצהרת נגישות · מילון · התחל כאן) + disclaimer "הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות." + update time. NO credit line (the owner removed "קרדיט: אדם שימקייביץ" on 21.11.2026 — never add it back).
 
 ## Owner's preferences so far
 - Concise writing (hard length limits are in the task prompt) — people read fast.
