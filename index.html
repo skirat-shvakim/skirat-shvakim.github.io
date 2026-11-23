@@ -21,7 +21,9 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="icon" type="image/png" href="/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Secular+One&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Secular+One&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Secular+One&display=swap"></noscript>
 <style>
 /* VOICE: calm, confident, a little playful — an evening ride through the market
    IDEA: a metro line map: the briefing is one line, every section is a station
@@ -211,6 +213,20 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .fbb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .fb .fbt{margin:10px 0 0;font-weight:500;color:var(--mute);font-size:15px}
 [hidden]{display:none!important}
+.myth{--c:var(--red)}
+.myth .claim{font-family:"Secular One","Heebo",sans-serif;font-size:22px;line-height:1.35;margin:4px 0 14px}
+.mb{display:flex;gap:10px;flex-wrap:wrap}
+.mb button{min-height:48px;min-width:120px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font:700 16px "Heebo",sans-serif;cursor:pointer}
+.mb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.mv{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.mv .res{display:block;font-weight:800;margin-bottom:4px}
+.mv p{margin:0}
+.ask{--c:var(--amber)}
+.ask .q{font-weight:700;font-size:18px;margin:0 0 4px}
+.ask .by{font-size:14px;color:var(--mute);margin:0 0 10px}
+.ask .a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.ask .inv{margin:0 0 10px}
+
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .spons{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 14px;padding:12px 16px;border:1px dashed var(--line);border-radius:16px;font-size:15px}
 .route .spons{position:relative}.route .spons::before{content:"";position:absolute;inset-inline-start:-31px;top:-14px;bottom:-14px;width:8px;background:var(--grey)}
@@ -357,12 +373,25 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <p>הריבית שהבנקים בישראל גובים על הלוואות. היא תמיד גבוהה ב-1.5 נקודות אחוז מריבית בנק ישראל.</p>
       <p class="ex">דוגמה מהיום: ריבית בנק ישראל נשארה 3.25%, ולכן הפריים נשאר 4.75%. משכנתא במסלול פריים לא משתנה.</p>
     </section>
+    <section class="card myth" id="myth" data-nav="מיתוס או עובדה">
+      <h2>מיתוס או עובדה?</h2>
+      <p class="claim">"כשהבורסה נופלת, הכסף בפנסיה שלי הלך."</p>
+      <div class="mb" role="group" aria-label="מה דעתך?"><button type="button" data-g="myth">מיתוס</button><button type="button" data-g="fact">עובדה</button></div>
+      <div class="mv" id="mythAns" data-ans="myth" aria-live="polite" hidden><span class="res">מיתוס.</span><p>ירידה היא הפסד על הנייר. הכסף לא נעלם אם לא מוכרים. היום, למשל, חלק גדול מהירידות של השבוע חזר.</p></div>
+    </section>
   </div>
 
   <section class="card faq" id="faqs" data-nav="שאלות ותשובות" data-fold>
     <h2>שאלות ותשובות</h2>
     <div id="faq" class="teaser"></div>
     <div class="fold-body"><div id="faqMore"></div></div>
+  </section>
+
+  <section class="card ask" id="ask" data-nav="שאלת קורא" hidden>
+    <h2>שאלת קורא</h2>
+    <div class="qa" id="askQA" hidden><p class="q"></p><p class="by"></p><div class="a"></div></div>
+    <p class="inv">יש לך שאלה על כסף או על השוק? שלח אותה. בכל ערב אנחנו עונים על שאלה אחת.</p>
+    <a class="jbtn" id="askBtn" href="#" target="_blank" rel="noopener">שליחת שאלה</a>
   </section>
 
   <section class="card" id="tomorrow" data-nav="מה לעקוב מחר" data-fold>
@@ -417,7 +446,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   </div>
 </div>
 
-<script src="money.js"></script>
+<script src="money.js" defer></script>
 <script>
 {
   const STOCKS=[
@@ -502,7 +531,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 
   // ===== side navigation =====
   const nav=document.getElementById('nav'),navList=document.getElementById('navList'),scrim=document.getElementById('scrim'),menuBtn=document.getElementById('menuBtn');
-  const secs=[...document.querySelectorAll('[data-nav]')];
+  const secs=[...document.querySelectorAll('[data-nav]')].filter(x=>!x.closest('[hidden]'));
   navList.innerHTML=secs.map(x=>`<li><a href="#${x.id}">${x.dataset.nav}</a></li>`).join('');
   const setNav=on=>{nav.classList.toggle('on',on);scrim.classList.toggle('on',on);menuBtn.setAttribute('aria-expanded',on)};
   menuBtn.addEventListener('click',()=>setNav(!nav.classList.contains('on')));
@@ -581,6 +610,15 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   {const pb=document.getElementById('progBar');let raf=0;
    const upd=()=>{raf=0;const h=document.documentElement,max=h.scrollHeight-innerHeight;pb.style.transform='scaleX('+(max>0?Math.min(1,Math.max(0,h.scrollTop/max)):0)+')'};
    addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',upd);upd();}
+
+  // ===== myth or fact =====
+  {const box=document.getElementById('mythAns');if(box){const bs=document.querySelectorAll('[data-g]'),k='myth-'+(document.querySelector('.top .date')||{}).textContent;
+   const show=g=>{const ok=g===box.dataset.ans;bs.forEach(b=>{b.setAttribute('aria-pressed',b.dataset.g===g);b.disabled=true});
+     box.querySelector('.res').textContent=(ok?'צדקת! ':'לא בדיוק. ')+(box.dataset.ans==='myth'?'זה מיתוס.':'זו עובדה.');box.hidden=false};
+   try{const g=localStorage.getItem(k);if(g)show(g)}catch(e){}
+   bs.forEach(b=>b.addEventListener('click',()=>{const g=b.dataset.g;ev(g===box.dataset.ans?'myth-right':'myth-wrong');try{localStorage.setItem(k,g)}catch(e){}show(g)}));}}
+  // ===== offline / fast repeat visits =====
+  if('serviceWorker' in navigator&&location.protocol==='https:'){addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}))}
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
