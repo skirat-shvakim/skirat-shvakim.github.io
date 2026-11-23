@@ -203,6 +203,12 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .chg{direction:rtl;unicode-bidi:isolate}
 .foot a{color:inherit}
 @media (max-width:420px){.tsz button{width:34px}.date{display:none}}
+.fb{text-align:center;margin-top:26px;padding:20px 16px;border-radius:18px;background:var(--panel)}
+.fb p{margin:0 0 10px;font-weight:700;font-size:18px}
+.fbb{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fbb button{min-height:48px;min-width:120px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font:700 16px "Heebo",sans-serif;cursor:pointer}
+.fbb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.fb .fbt{margin:10px 0 0;font-weight:500;color:var(--mute);font-size:15px}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
 .sheet{position:fixed;inset:auto 0 0 0;z-index:9;display:none;padding:0 12px max(env(safe-area-inset-bottom),12px)}
 .sheet.on{display:block}
@@ -374,6 +380,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 
 </main>
 
+  <div class="fb" id="fb" role="group" aria-labelledby="fbq"><p id="fbq">הסקירה הייתה ברורה?</p><div class="fbb"><button type="button" data-fb="yes" aria-label="כן, ברורה">👍 כן</button><button type="button" data-fb="no" aria-label="לא, לא ברורה">👎 לא ממש</button></div><p class="fbt" id="fbt" hidden>תודה! זה עוזר לנו לשפר.</p></div>
   <div class="sharefoot"><p>אהבת? שלח לחבר שמתחיל להתעניין בשוק</p><button type="button" class="share" data-share>שיתוף</button></div>
   <p class="foot"><a href="accessibility.html">הצהרת נגישות</a> · <a href="glossary.html">מילון</a> · <a href="start.html">התחל כאן</a><br>הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>עודכן: 23.11.2026 19:15</p>
 </div>
@@ -535,6 +542,13 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   const nb=document.getElementById('newbie');let seenB=null;try{seenB=localStorage.getItem('seen')}catch(e){}
   if(nb&&!seenB){nb.hidden=false;document.getElementById('newbieX').addEventListener('click',()=>{nb.hidden=true;try{localStorage.setItem('seen','1')}catch(e){}})}
   if(nb)nb.querySelector('a').addEventListener('click',()=>{try{localStorage.setItem('seen','1')}catch(e){}});
+
+  // ===== one-tap feedback =====
+  {const fbk='fb-'+(document.querySelector('.top .date')||{}).textContent;const bs=document.querySelectorAll('[data-fb]'),t=document.getElementById('fbt');
+   const mark=v=>{bs.forEach(b=>{b.setAttribute('aria-pressed',b.dataset.fb===v);b.disabled=true});t.hidden=false};
+   let done=null;try{done=localStorage.getItem(fbk)}catch(e){}
+   if(done)mark(done);
+   bs.forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.fb;ev('feedback-'+v);try{localStorage.setItem(fbk,v)}catch(e){}mark(v)}));}
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
