@@ -213,6 +213,13 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .fbb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .fb .fbt{margin:10px 0 0;font-weight:500;color:var(--mute);font-size:15px}
 [hidden]{display:none!important}
+.kidb{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:2px 0 8px;padding:0 16px;border-radius:999px;border:2px solid var(--green);background:var(--bg);color:var(--ink);font:700 15px "Heebo",sans-serif;cursor:pointer}
+.kidb[aria-expanded=true]{background:var(--green);color:#fff}
+.kid{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px}
+.kid p{margin:0 0 6px}.kid p:last-child{margin:0}
+.todo{margin-top:14px;background:var(--bg);border:2px solid var(--amber);border-radius:14px;padding:12px 14px}
+.todo b{display:block;font-size:15px;color:var(--sunink);margin-bottom:2px}
+.todo p{margin:0}
 .myth{--c:var(--red)}
 .myth .claim{font-family:"Secular One","Heebo",sans-serif;font-size:22px;line-height:1.35;margin:4px 0 14px}
 .mb{display:flex;gap:10px;flex-wrap:wrap}
@@ -302,6 +309,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <li><b>משכנתא:</b> ה<button class="term" data-t="prime">פריים</button> נשאר 4.75%. ההחזר במסלול פריים לא משתנה. ההחלטה הבאה: 4 בינואר.</li>
       <li><b>פנסיה והשתלמות:</b> המניות בחו״ל מתאוששות היום. אבל יום אחד לא מוחק שבוע של ירידות.</li>
     </ul>
+    <div class="todo"><b>✅ משהו שאפשר לעשות</b><p>יש לך משכנתא? היכנס לאתר הבנק ובדוק כמה ממנה במסלול פריים. לוקח 2 דקות.</p></div>
   </section>
 
   <aside class="spons" id="sponsorSlot" aria-label="תוכן בחסות" hidden></aside>
@@ -344,6 +352,13 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   <section class="card" id="story" data-nav="הסיפור של היום" data-fold>
     <h2>הסיפור של היום</h2>
     <p class="teaser">המנכ״ל של אנבידיה חזר לתפקיד, והשווקים שנפלו בשבוע שעבר זינקו היום.</p>
+    <button type="button" class="kidb" id="kidBtn" aria-expanded="false" aria-controls="kid">🧒 תסביר לי כמו לילד בן 10</button>
+    <div class="kid" id="kid" hidden>
+      <p>תחשוב על קבוצת כדורגל שהמאמן שלה עזב פתאום.</p>
+      <p>האוהדים נבהלו, ומחיר הכרטיסים ירד.</p>
+      <p>היום המאמן חזר. האוהדים שמחו, והמחיר קפץ שוב.</p>
+      <p>זה מה שקרה לאנבידיה. ובעקבותיה, כל השוק התעודד.</p>
+    </div>
     <div class="fold-body">
       <p>ג׳נסן הואנג, מייסד אנבידיה, התפטר לפני כשבועיים. ברקע היו דיווחים על קשר לבכירה שנחשדה כסוכנת סינית. היום ה<button class="term" data-t="board">דירקטוריון</button> החזיר אותו לתפקיד. הדירקטוריון אמר שקיבל מידע מבכירים בממשל האמריקאי. החקירה הפנימית תימשך. המניה זינקה בכ-34%, אבל עדיין כ-30% מתחת לשיא של אוקטובר.</p>
       <p>הזינוק סחף את כל מניות השבבים. AMD עלתה כ-8%, וטאואר בתל אביב עלתה 8.6%. מדד הפחד ירד בכרבע. אבל הבעיות לא נעלמו. ענקיות הטכנולוגיה עדיין מוציאות הון על בינה מלאכותית. והפד צפוי להעלות ריבית בדצמבר.</p>
@@ -619,6 +634,9 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
    bs.forEach(b=>b.addEventListener('click',()=>{const g=b.dataset.g;ev(g===box.dataset.ans?'myth-right':'myth-wrong');try{localStorage.setItem(k,g)}catch(e){}show(g)}));}}
   // ===== offline / fast repeat visits =====
   if('serviceWorker' in navigator&&location.protocol==='https:'){addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}))}
+
+  // ===== kid mode =====
+  {const kb=document.getElementById('kidBtn'),kd=document.getElementById('kid');if(kb&&kd)kb.addEventListener('click',()=>{const on=kd.hidden;kd.hidden=!on;kb.setAttribute('aria-expanded',on);if(on)ev('kid-open')})}
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
