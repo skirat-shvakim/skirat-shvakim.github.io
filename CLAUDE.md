@@ -66,6 +66,11 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 ## Saved for later (owner said "keep for later", 18.11.2026)
 - Distribution plan: send to 10 friends for honest feedback; open a WhatsApp channel "בורסה בפיג'מה" and paste the daily ready message; daily vertical (1080x1920) card for WhatsApp status / Instagram story with the hook + term of the day (could be a second renderer next to tools/make_og.py).
 - After ~2 weeks: review GoatCounter numbers → decide on push notifications / app.
+- MONETISATION ON HOLD (owner, 23.11.2026: "save it, don't change anything for now"). Focus now = improving the site and making people want more. Do NOT turn on any money block unless the owner asks. Saved paths when he returns:
+  1. Newsletter: pick a mail service (Sender ≈2,500 free subscribers; MailerLite free 250, RSS campaigns paid) → put its form action or signup link in money.js; connect feed.xml for automatic daily emails.
+  2. Reader support ("הזמינו אותנו לקפה"): PayBox business payment link (simplest for Israeli readers) or Ko-fi via PayPal (0% on one-off tips on the free plan; PayPal fees apply) → support.url in money.js.
+  3. Before taking money: open an עוסק פטור file online at the Tax Authority (2026 ceiling 122,833 ₪); check with an accountant.
+  4. Sponsorship: dropped for now (code dormant).
 - Side-income ideas offered earlier: branded briefing for insurance/pension agents, personalised "מה זה אומר עליי", employer financial-wellness edition, prediction league, audio version, selling the "machine" to other niches.
 
 ## Working notes
