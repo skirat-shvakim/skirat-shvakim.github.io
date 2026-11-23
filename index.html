@@ -209,6 +209,9 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .fbb button{min-height:48px;min-width:120px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font:700 16px "Heebo",sans-serif;cursor:pointer}
 .fbb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .fb .fbt{margin:10px 0 0;font-weight:500;color:var(--mute);font-size:15px}
+.prog{position:fixed;top:0;inset-inline:0;height:4px;z-index:30;background:transparent;pointer-events:none}
+.prog i{display:block;height:100%;width:100%;transform-origin:right center;transform:scaleX(0);background:linear-gradient(to left,var(--blue),var(--amber) 45%,var(--red) 70%,var(--green));transition:transform .08s linear}
+@media (prefers-reduced-motion:reduce){.prog i{transition:none}}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px;line-height:1.6}
 .sheet{position:fixed;inset:auto 0 0 0;z-index:9;display:none;padding:0 12px max(env(safe-area-inset-bottom),12px)}
 .sheet.on{display:block}
@@ -222,7 +225,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 </head>
 <body>
 <div class="wrap">
-  <a class="skip" href="#hero">דלג לתוכן</a>
+  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+<a class="skip" href="#hero">דלג לתוכן</a>
   <header class="top">
     <a class="brand" href="#hero" aria-label="בורסה בפיג'מה, לראש העמוד">
       <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#131d3b"/><circle cx="26.5" cy="11.5" r="6" fill="#ffd76a"/><circle cx="29.3" cy="9.6" r="5.3" fill="#131d3b"/><path d="M6 31 L13.5 24 L20 26 L32.5 17.5" fill="none" stroke="#4d86ff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="24" r="3" fill="#131d3b" stroke="#f5b400" stroke-width="2.3"/><circle cx="32.5" cy="17.5" r="3" fill="#131d3b" stroke="#ff6a55" stroke-width="2.3"/><circle cx="9" cy="9" r=".8" fill="#fff"/><circle cx="16" cy="6.5" r=".6" fill="#fff"/></svg>
@@ -549,6 +553,11 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
    let done=null;try{done=localStorage.getItem(fbk)}catch(e){}
    if(done)mark(done);
    bs.forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.fb;ev('feedback-'+v);try{localStorage.setItem(fbk,v)}catch(e){}mark(v)}));}
+
+  // ===== reading progress bar =====
+  {const pb=document.getElementById('progBar');let raf=0;
+   const upd=()=>{raf=0;const h=document.documentElement,max=h.scrollHeight-innerHeight;pb.style.transform='scaleX('+(max>0?Math.min(1,Math.max(0,h.scrollTop/max)):0)+')'};
+   addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',upd);upd();}
 }
 </script>
 <script data-goatcounter="https://adamandrachel.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
