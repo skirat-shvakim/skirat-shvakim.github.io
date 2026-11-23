@@ -35,6 +35,7 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 - `advertise.html` = media kit (audience numbers, packages, rules, contact) rendered from money.js. Rules: sponsorship always labelled "בחסות"; no sponsor for a specific stock/crypto/investment product; sponsors never influence content.
 - RSS: `feed.xml` for RSS-to-email. MANDATORY in every daily and weekly run, after index.html is final: `python3 tools/make_feed.py` and `git add feed.xml` in the same commit.
 - GoatCounter events: sponsor-view, sponsor-click, newsletter-signup, newsletter-click, support-click, advertise-contact.
+- 23.11.2026: owner DROPPED sponsorship — keep sponsor.active=false and contact empty (sponsor slot, advertise links stay hidden; code kept dormant, do not remove placeholders). Active tracks: newsletter + reader support.
 - Waiting for the owner: choose a mail service (Sender ≈2,500 free subscribers; MailerLite free = 250, RSS campaigns paid), a support/payment link (PayBox/Bit business/Ko-fi — check Israel payouts), a contact email/WhatsApp for advertisers, and register as עוסק פטור before taking money.
 
 ## Page structure (`index.html`, single self-contained file)
