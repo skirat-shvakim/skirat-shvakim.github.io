@@ -29,6 +29,14 @@ A daily evening market briefing in Hebrew for beginners, published as a static w
 ### Glossary file
 - Before committing, merge today's GLOSSARY into `glossary.json` (array of {term, def}): add every term not already there (match by term), keep existing entries, sort by term (Hebrew locale), and `git add glossary.json` in the same commit. glossary.html reads it.
 
+## Money infrastructure (added 23.11.2026 — owner chose: sponsorship, newsletter, reader support)
+- `money.js` = the ONLY place for sponsor / newsletter / support / advertiser-contact settings (owner edits it, or asks Claude). Daily/weekly agents NEVER edit money.js. Empty field = that block stays hidden. Preview everything with demo data: `/?money-preview` and `/advertise.html?money-preview`.
+- index.html placeholders that every edition must keep exactly: `<link rel="alternate" ... feed.xml>` in <head>; `<aside class="spons" id="sponsorSlot" ... hidden></aside>` right after the `me` section; `<section class="join" id="join" ... hidden></section>` right before `#fb`; `<li data-adv hidden>` (nav) and `<span data-adv hidden>` (footer) "פרסמו אצלנו" links; `<script src="money.js"></script>` right before the main <script>; the `[hidden]{display:none!important}`, `.spons`, `.join`, `.jf`, `.jbtn` CSS.
+- `advertise.html` = media kit (audience numbers, packages, rules, contact) rendered from money.js. Rules: sponsorship always labelled "בחסות"; no sponsor for a specific stock/crypto/investment product; sponsors never influence content.
+- RSS: `feed.xml` for RSS-to-email. MANDATORY in every daily and weekly run, after index.html is final: `python3 tools/make_feed.py` and `git add feed.xml` in the same commit.
+- GoatCounter events: sponsor-view, sponsor-click, newsletter-signup, newsletter-click, support-click, advertise-contact.
+- Waiting for the owner: choose a mail service (Sender ≈2,500 free subscribers; MailerLite free = 250, RSS campaigns paid), a support/payment link (PayBox/Bit business/Ko-fi — check Israel payouts), a contact email/WhatsApp for advertisers, and register as עוסק פטור before taking money.
+
 ## Page structure (`index.html`, single self-contained file)
 - Design: "metro line" — a thick coloured route down the side; each section is a station (`.route [data-nav]::before/::after`). Fonts: Secular One (headings) + Heebo. White ground; line colours blue/amber/red/green/teal. Dark mode via `light-dark()`.
 - Brand renamed 18.11.2026 to "בורסה בפיג'מה" (logo: night-blue square, crescent moon + metro line). og.png = night-sky share card; bump ?v=N on og.png/icon URLs when they change (WhatsApp caches).

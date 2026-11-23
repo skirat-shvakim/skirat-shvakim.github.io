@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>בורסה בפיג'מה</title>
 <meta name="description" content="אחרי השבוע הגרוע מאז 2020, הבורסות בעולם מזנקות. בנק ישראל השאיר את הריבית, והשקל התחזק.">
+<link rel="alternate" type="application/rss+xml" title="בורסה בפיג'מה" href="https://skirat-shvakim.github.io/feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="בורסה בפיג'מה">
 <meta property="og:locale" content="he_IL">
@@ -209,6 +210,24 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 .fbb button{min-height:48px;min-width:120px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font:700 16px "Heebo",sans-serif;cursor:pointer}
 .fbb button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .fb .fbt{margin:10px 0 0;font-weight:500;color:var(--mute);font-size:15px}
+[hidden]{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.spons{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 14px;padding:12px 16px;border:1px dashed var(--line);border-radius:16px;font-size:15px}
+.route .spons{position:relative}.route .spons::before{content:"";position:absolute;inset-inline-start:-31px;top:-14px;bottom:-14px;width:8px;background:var(--grey)}
+@media (max-width:420px){.route .spons::before{inset-inline-start:-24px;width:6px}}
+.spons p{margin:0;flex:1 1 220px}
+.spons .spl{font-size:12px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:1px 10px}
+.spons a{font-weight:700;color:var(--blue);min-height:44px;display:inline-flex;align-items:center}
+.join{text-align:center;margin-top:26px;padding:22px 16px;border-radius:18px;background:var(--panel)}
+.join h2{margin:0 0 6px}.join p{margin:0 0 12px}
+.join hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+.jf{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:460px;margin:0 auto}
+.jf input[type=email]{flex:1 1 220px;min-height:48px;padding:0 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:500 16px "Heebo",sans-serif;text-align:right}
+.jf .jc{flex-basis:100%;font-size:14px;color:var(--mute);display:flex;gap:8px;align-items:center;justify-content:center}
+.jf .jc input{width:20px;height:20px}
+.jf button,.jbtn{min-height:48px;padding:0 22px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font:700 16px "Heebo",sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.jbtn.alt{background:var(--bg);color:var(--ink);border:2px solid var(--ink)}
+.jok{font-weight:700}
 .prog{position:fixed;top:0;inset-inline:0;height:4px;z-index:30;background:transparent;pointer-events:none}
 .prog i{display:block;height:100%;width:100%;transform-origin:right center;transform:scaleX(0);background:linear-gradient(to left,var(--blue),var(--amber) 45%,var(--red) 70%,var(--green));transition:transform .08s linear}
 @media (prefers-reduced-motion:reduce){.prog i{transition:none}}
@@ -240,7 +259,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   <nav class="nav" id="nav" aria-label="ניווט בסקירה">
     <div class="navhead"><b>בסקירה של היום</b><button type="button" id="navX" aria-label="סגירת התפריט">✕</button></div>
     <ul id="navList"></ul>
-    <ul class="extra"><li><a href="start.html">התחל כאן: 5 מושגים בסיסיים</a></li><li><a href="glossary.html">המילון: כל המונחים</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li></ul>
+    <ul class="extra"><li><a href="start.html">התחל כאן: 5 מושגים בסיסיים</a></li><li><a href="glossary.html">המילון: כל המונחים</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li data-adv hidden><a href="advertise.html">פרסמו אצלנו</a></li></ul>
   </nav>
   <div class="scrim" id="scrim"></div>
 
@@ -268,6 +287,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <li><b>פנסיה והשתלמות:</b> המניות בחו״ל מתאוששות היום. אבל יום אחד לא מוחק שבוע של ירידות.</li>
     </ul>
   </section>
+
+  <aside class="spons" id="sponsorSlot" aria-label="תוכן בחסות" hidden></aside>
 
   <section class="card" id="numbers" data-nav="המספרים">
     <h2>המספרים</h2>
@@ -384,9 +405,10 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
 
 </main>
 
+  <section class="join" id="join" aria-labelledby="joinT" hidden></section>
   <div class="fb" id="fb" role="group" aria-labelledby="fbq"><p id="fbq">הסקירה הייתה ברורה?</p><div class="fbb"><button type="button" data-fb="yes" aria-label="כן, ברורה">👍 כן</button><button type="button" data-fb="no" aria-label="לא, לא ברורה">👎 לא ממש</button></div><p class="fbt" id="fbt" hidden>תודה! זה עוזר לנו לשפר.</p></div>
   <div class="sharefoot"><p>אהבת? שלח לחבר שמתחיל להתעניין בשוק</p><button type="button" class="share" data-share>שיתוף</button></div>
-  <p class="foot"><a href="accessibility.html">הצהרת נגישות</a> · <a href="glossary.html">מילון</a> · <a href="start.html">התחל כאן</a><br>הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>עודכן: 23.11.2026 19:15</p>
+  <p class="foot"><a href="accessibility.html">הצהרת נגישות</a> · <a href="glossary.html">מילון</a> · <a href="start.html">התחל כאן</a><span data-adv hidden> · <a href="advertise.html">פרסמו אצלנו</a></span><br>הסקירה היא סיכום מידע וניתוח בלבד ואינה מהווה ייעוץ השקעות.<br>עודכן: 23.11.2026 19:15</p>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sh-t">
@@ -395,6 +417,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
   </div>
 </div>
 
+<script src="money.js"></script>
 <script>
 {
   const STOCKS=[
